@@ -11,7 +11,13 @@ import CoreLocation
 import MapKit
 
 class SearchViewController: UIViewController {
-    
+
+    let searchView = SearchView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.view.addSubview(searchView)
+        // Do any additional setup after loading the view.
     
     let searchView = SearchView()
     var currentSelectedJobCenter: JobCenter!
@@ -56,6 +62,7 @@ class SearchViewController: UIViewController {
         searchView.mapView.delegate = self
         searchView.zipCodeSearchBar.delegate = self
         askUserForPermission()
+
     }
     
     func askUserForPermission(){

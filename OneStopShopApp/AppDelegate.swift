@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        PersistantManager.manager.loadFavorites()
+       // let searchVC = SearchViewController()
+        let tabVC = TabBarViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = tabVC
+        window?.makeKeyAndVisible()
         return true
     }
 

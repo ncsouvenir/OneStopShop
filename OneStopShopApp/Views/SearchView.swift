@@ -12,11 +12,52 @@ import SnapKit
 
 class SearchView: UIView {
     
-//    lazy var venueSearchBar: UISearchBar = {
-//        let searchBar = UISearchBar()
-//        searchBar.placeholder = "Search a Venue"
-//        return searchBar
-//    }()
+        lazy var searchBar: UISearchBar = {
+            let sb = UISearchBar()
+            sb.placeholder = "Queens NY"
+            sb.barTintColor = .white
+            return sb
+        }()
+        
+
+    lazy var mapView: MKMapView = {
+       let map = MKMapView()
+        map.showsUserLocation = true // default is false
+        return map
+    }()
+        lazy var userTrackingButton: MKUserTrackingButton = {
+            let button = MKUserTrackingButton()
+            return button
+        }()
+        
+        override init(frame: CGRect) {
+            super.init(frame: UIScreen.main.bounds)
+            commonInit()
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            commonInit()
+        }
+        
+        
+        private func commonInit() {
+            setupViews()
+            
+        }
+    private func setupViews() {
+        addSubview(searchBar)
+        addSubview(mapView)
+        
+    }
+    
+        
+    }
+ 
+
+
+
+class SearchView: UIView {
     
     lazy var zipCodeSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -108,17 +149,6 @@ class SearchView: UIView {
         }
     }
     
-    
-    
-//    func setupCollectionView() {
-//        self.addSubview(collectionView)
-//        self.collectionView.snp.remakeConstraints { (make) -> Void in
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//            make.height.equalToSuperview().dividedBy(5)
-//            make.bottom.equalTo(mapView.snp.bottom).offset(-50)
-//
-//
-//        }
-//    }
+
 }
+

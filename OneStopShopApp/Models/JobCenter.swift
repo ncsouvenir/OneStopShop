@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct JobCenter: Codable {
     let borough: String
     let streetAddress: String
