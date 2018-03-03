@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import SnapKit
+
 
 class ListViewController: UIViewController {
+    
     var listView = ListView()
+    
     var jobCenters = [JobCenter](){
         didSet {
             listView.ListTableView.reloadData()
@@ -20,28 +24,43 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         listView.ListTableView.dataSource = self
         listView.ListTableView.delegate = self
-        listView.ListTableView.rowHeight = 97.5
+        //listView.ListTableView.rowHeight = 50
         configureNavigation()
+        addConstraints()
         loadData()
 
     }
     
     private func loadData(){
-        
+        JobCenterAPIClient.manager.getResources(with: "11432", completionHandler: { (onlineJobCenters) in
+            self.jobCenters = onlineJobCenters
+        }, errorHandler: {print ($0)})
     }
     
     private func configureNavigation(){
         view.backgroundColor = .red
             navigationItem.title = "List of Job Centers "
     }
-
+    
+    private func addConstraints(){
+     view.addSubview(listView)
+        listView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view.snp.edges)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 }
+
+//Extensions
 extension ListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
 }
 extension ListViewController: UITableViewDataSource {

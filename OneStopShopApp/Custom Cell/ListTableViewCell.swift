@@ -23,11 +23,13 @@ class ListTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    
+   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "ListCell")
         setupViews()
-        
-    }
+    
+        }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -50,7 +52,6 @@ class ListTableViewCell: UITableViewCell {
         addSubview(cityLabel)
         cityLabel.snp.makeConstraints { (make) in
             make.right.equalTo(snp.right).offset(-8)
-            make.left.equalTo(centerNameLabel.snp.right).offset(16)
             make.centerY.equalTo(snp.centerY)
         }
         
