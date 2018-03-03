@@ -9,26 +9,30 @@
 import UIKit
 
 class ListViewController: UIViewController {
-
+    var listView = ListView()
+    var jobCenters = [JobCenter](){
+        didSet {
+            listView.ListTableView.reloadData()
+        }
+    }
     
-    lazy var ListTableView: UITableView = {
-        let tv = UITableView()
-        tv.register(ListTableViewCell.self, forCellReuseIdentifier: "ListCell")
-        return tv
-    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ListTableView.dataSource = self
-        //ListTableView.delegate = self
-        //configureNavigation()
-        ListTableView.rowHeight = 97.5
+        listView.ListTableView.dataSource = self
+        listView.ListTableView.delegate = self
+        listView.ListTableView.rowHeight = 97.5
+        configureNavigation()
+        loadData()
 
-        
-
-        // Do any additional setup after loading the view.
     }
+    
+    private func loadData(){
+        
+    }
+    
     private func configureNavigation(){
-                navigationItem.title = "List VC it is for now"
+        view.backgroundColor = .red
+            navigationItem.title = "List of Job Centers "
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,15 +40,23 @@ class ListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+}
+extension ListViewController: UITableViewDelegate {
+    
+}
+extension ListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return jobCenters.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell {
+            let jobCenter = jobCenters[indexPath.row]
+            cell.configureCell(jobCenter: jobCenter)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    
 }
