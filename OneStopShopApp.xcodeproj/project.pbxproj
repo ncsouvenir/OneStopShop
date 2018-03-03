@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FF27EEC705EC3DE705AE5A6 /* Pods_OneStopShopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2990536364BECF8296150EB /* Pods_OneStopShopApp.framework */; };
 		81B76062204A117000A4E53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B76061204A117000A4E53E /* AppDelegate.swift */; };
 		81B76069204A117000A4E53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B76068204A117000A4E53E /* Assets.xcassets */; };
 		81B7606C204A117000A4E53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B7606A204A117000A4E53E /* LaunchScreen.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7AABE6ECBBF01E94668DB671 /* Pods-OneStopShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneStopShopApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp.release.xcconfig"; sourceTree = "<group>"; };
 		81B7605E204A117000A4E53E /* OneStopShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneStopShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B76061204A117000A4E53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81B76068204A117000A4E53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		81D852B3204AF43D00987370 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		81D852B5204AF44B00987370 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		81D852B7204AF46300987370 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		9D284295F825C1EF697E401F /* Pods-OneStopShopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneStopShopApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp.debug.xcconfig"; sourceTree = "<group>"; };
+		E2990536364BECF8296150EB /* Pods_OneStopShopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneStopShopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF27EEC705EC3DE705AE5A6 /* Pods_OneStopShopApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7255A942C2CDE86EA76F3F93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2990536364BECF8296150EB /* Pods_OneStopShopApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		81B76055204A117000A4E53E = {
 			isa = PBXGroup;
 			children = (
 				81B76060204A117000A4E53E /* OneStopShopApp */,
 				81B7605F204A117000A4E53E /* Products */,
+				AB4F9F9ABA49470D6AAE813F /* Pods */,
+				7255A942C2CDE86EA76F3F93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +140,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		AB4F9F9ABA49470D6AAE813F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9D284295F825C1EF697E401F /* Pods-OneStopShopApp.debug.xcconfig */,
+				7AABE6ECBBF01E94668DB671 /* Pods-OneStopShopApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81B76070204A117000A4E53E /* Build configuration list for PBXNativeTarget "OneStopShopApp" */;
 			buildPhases = (
+				9E6E44712A64F19DB7DF3184 /* [CP] Check Pods Manifest.lock */,
 				81B7605A204A117000A4E53E /* Sources */,
 				81B7605B204A117000A4E53E /* Frameworks */,
 				81B7605C204A117000A4E53E /* Resources */,
+				05D61CA7215AB39C948BBE07 /* [CP] Embed Pods Frameworks */,
+				827C9CF0704D87593431C1E8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,6 +217,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05D61CA7215AB39C948BBE07 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		827C9CF0704D87593431C1E8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E6E44712A64F19DB7DF3184 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneStopShopApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		81B7605A204A117000A4E53E /* Sources */ = {
@@ -332,6 +413,7 @@
 		};
 		81B76071204A117000A4E53E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D284295F825C1EF697E401F /* Pods-OneStopShopApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -346,6 +428,7 @@
 		};
 		81B76072204A117000A4E53E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AABE6ECBBF01E94668DB671 /* Pods-OneStopShopApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
