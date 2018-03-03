@@ -53,6 +53,15 @@ class DetailViewController: UITableViewController {
         }
         return cell
     }
+    
+    
+    func configureNavBar() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(favoriteButtonPressed))
+    }
+    
+    @objc func favoriteButtonPressed() {
+        
+    }
 
 }
 
