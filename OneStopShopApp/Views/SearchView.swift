@@ -7,15 +7,51 @@
 //
 
 import UIKit
-
+import MapKit
+import SnapKit
 class SearchView: UIView {
+    
+        lazy var searchBar: UISearchBar = {
+            let sb = UISearchBar()
+            sb.placeholder = "Queens NY"
+            sb.barTintColor = .white
+            return sb
+        }()
+        
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    lazy var mapView: MKMapView = {
+       let map = MKMapView()
+        map.showsUserLocation = true // default is false
+        return map
+    }()
+        lazy var userTrackingButton: MKUserTrackingButton = {
+            let button = MKUserTrackingButton()
+            return button
+        }()
+        
+        override init(frame: CGRect) {
+            super.init(frame: UIScreen.main.bounds)
+            commonInit()
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            commonInit()
+        }
+        
+        
+        private func commonInit() {
+            setupViews()
+            
+        }
+    private func setupViews() {
+        addSubview(searchBar)
+        addSubview(mapView)
+        
     }
-    */
+    
+        
+    }
+ 
 
-}
+

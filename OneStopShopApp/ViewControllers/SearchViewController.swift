@@ -10,9 +10,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    let searchView = SearchView()
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.addSubview(searchView)
         // Do any additional setup after loading the view.
     }
 
