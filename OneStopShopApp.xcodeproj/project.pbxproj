@@ -87,20 +87,12 @@
 				81B76076204A4DED00A4E53E /* CustomCells */,
 				81B76075204A4DE700A4E53E /* Views */,
 				81B76074204A4DDC00A4E53E /* ViewControllers */,
-				81B76073204A4DC200A4E53E /* Network */,
 				81B76061204A117000A4E53E /* AppDelegate.swift */,
 				81B76068204A117000A4E53E /* Assets.xcassets */,
 				81B7606A204A117000A4E53E /* LaunchScreen.storyboard */,
 				81B7606D204A117000A4E53E /* Info.plist */,
 			);
 			path = OneStopShopApp;
-			sourceTree = "<group>";
-		};
-		81B76073204A4DC200A4E53E /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		81B76074204A4DDC00A4E53E /* ViewControllers */ = {
