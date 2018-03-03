@@ -16,7 +16,7 @@ struct JobCenter: Codable {
     let latitude: String
     let longitude: String
     let zipCode: String
-    let phoneNumber: String?
+    let phoneNumber: String
     enum CodingKeys: String, CodingKey {
         case borough
         case streetAddress = "street_address"
