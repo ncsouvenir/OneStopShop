@@ -35,4 +35,30 @@ struct JobCenterAPIClient {
         
         
     }
+    
+    func getResourcesByBorough(with borough: String, completionHandler: @escaping ([JobCenter]) -> Void, errorHandler: @escaping (Error) -> Void) {
+        guard let formattedBorough = borough.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
+            errorHandler(AppError.badURL(str: borough))
+            return
+        }
+        let fullUrlStr = "https://data.cityofnewyork.us/resource/9ri9-nbz5.json?borough=\(formattedBorough)"
+        guard let url = URL(string: fullUrlStr) else {errorHandler(AppError.badURL(str: fullUrlStr))
+            return
+        }
+        let request = URLRequest(url: url)
+        let parseDataIntoJobCenter: (Data) -> Void = {(data) in
+            do {
+                let results = try JSONDecoder().decode([JobCenter].self, from: data)
+                completionHandler(results)
+                
+            }
+            catch {
+                errorHandler(AppError.codingError(rawError: error))
+            }
+        }
+        NetworkHelper.manager.performDataTask(with: request, completionHandler: parseDataIntoJobCenter, errorHandler: errorHandler)
+        
+    }
+    
+    
 }
