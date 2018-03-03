@@ -11,7 +11,12 @@
 		814834AD204B010000533508 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834AC204B010000533508 /* NetworkHelper.swift */; };
 		814834AF204B011C00533508 /* JobCenterAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834AE204B011C00533508 /* JobCenterAPIClient.swift */; };
 		814834B1204B014D00533508 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B0204B014D00533508 /* AppError.swift */; };
+		814834B3204B218700533508 /* ContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B2204B218700533508 /* ContentFactory.swift */; };
+		814834B5204B320800533508 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B4204B320800533508 /* DetailTableViewCell.swift */; };
 		81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */; };
+		81B62E1F204B5ABF003657AD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E1E204B5ABF003657AD /* PersistanceManager.swift */; };
+		81B62E22204B5BDF003657AD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E21204B5BDF003657AD /* LocationService.swift */; };
+		81B62E24204B5C15003657AD /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E23204B5C15003657AD /* UserDefaults.swift */; };
 		81B76062204A117000A4E53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B76061204A117000A4E53E /* AppDelegate.swift */; };
 		81B76069204A117000A4E53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B76068204A117000A4E53E /* Assets.xcassets */; };
 		81B7606C204A117000A4E53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B7606A204A117000A4E53E /* LaunchScreen.storyboard */; };
@@ -31,7 +36,12 @@
 		814834AC204B010000533508 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		814834AE204B011C00533508 /* JobCenterAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCenterAPIClient.swift; sourceTree = "<group>"; };
 		814834B0204B014D00533508 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		814834B2204B218700533508 /* ContentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFactory.swift; sourceTree = "<group>"; };
+		814834B4204B320800533508 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "OneStopShopApp/Custom Cell/ListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		81B62E1E204B5ABF003657AD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		81B62E21204B5BDF003657AD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		81B62E23204B5C15003657AD /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		81B7605E204A117000A4E53E /* OneStopShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneStopShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B76061204A117000A4E53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81B76068204A117000A4E53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,8 +93,26 @@
 			isa = PBXGroup;
 			children = (
 				81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */,
+				814834B4204B320800533508 /* DetailTableViewCell.swift */,
 			);
 			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		81B62E1D204B5A6C003657AD /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				81B62E1E204B5ABF003657AD /* PersistanceManager.swift */,
+				81B62E23204B5C15003657AD /* UserDefaults.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		81B62E20204B5BC7003657AD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				81B62E21204B5BDF003657AD /* LocationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		81B76055204A117000A4E53E = {
@@ -108,6 +136,8 @@
 		81B76060204A117000A4E53E /* OneStopShopApp */ = {
 			isa = PBXGroup;
 			children = (
+				81B62E20204B5BC7003657AD /* Services */,
+				81B62E1D204B5A6C003657AD /* Persistence */,
 				81A6D7B5204B06AA00FC5A22 /* Custom Cell */,
 				814834AB204B00E900533508 /* Network */,
 				81B76077204A4DFD00A4E53E /* Models */,
@@ -148,6 +178,7 @@
 			children = (
 				81D852AB204AF3BE00987370 /* JobCenter.swift */,
 				814834B0204B014D00533508 /* AppError.swift */,
+				814834B2204B218700533508 /* ContentFactory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,16 +323,21 @@
 				81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */,
 				81D852B6204AF44B00987370 /* DetailViewController.swift in Sources */,
 				81D852A8204AF35600987370 /* SearchViewController.swift in Sources */,
+				81B62E1F204B5ABF003657AD /* PersistanceManager.swift in Sources */,
 				81D852B0204AF40F00987370 /* DetailView.swift in Sources */,
 				81D852AA204AF37500987370 /* SearchView.swift in Sources */,
 				814834B1204B014D00533508 /* AppError.swift in Sources */,
 				814834AF204B011C00533508 /* JobCenterAPIClient.swift in Sources */,
+				814834B3204B218700533508 /* ContentFactory.swift in Sources */,
 				814834AD204B010000533508 /* NetworkHelper.swift in Sources */,
 				81D852AE204AF3DA00987370 /* ListView.swift in Sources */,
+				814834B5204B320800533508 /* DetailTableViewCell.swift in Sources */,
 				81D852B2204AF42100987370 /* FavoritesView.swift in Sources */,
+				81B62E24204B5C15003657AD /* UserDefaults.swift in Sources */,
 				81D852AC204AF3BE00987370 /* JobCenter.swift in Sources */,
 				81D852B4204AF43D00987370 /* ListViewController.swift in Sources */,
 				81D852B8204AF46400987370 /* FavoritesViewController.swift in Sources */,
+				81B62E22204B5BDF003657AD /* LocationService.swift in Sources */,
 				81B76062204A117000A4E53E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
