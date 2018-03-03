@@ -11,6 +11,7 @@
 		814834AD204B010000533508 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834AC204B010000533508 /* NetworkHelper.swift */; };
 		814834AF204B011C00533508 /* JobCenterAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834AE204B011C00533508 /* JobCenterAPIClient.swift */; };
 		814834B1204B014D00533508 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B0204B014D00533508 /* AppError.swift */; };
+		81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */; };
 		81B76062204A117000A4E53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B76061204A117000A4E53E /* AppDelegate.swift */; };
 		81B76069204A117000A4E53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B76068204A117000A4E53E /* Assets.xcassets */; };
 		81B7606C204A117000A4E53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B7606A204A117000A4E53E /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 		814834AC204B010000533508 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		814834AE204B011C00533508 /* JobCenterAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCenterAPIClient.swift; sourceTree = "<group>"; };
 		814834B0204B014D00533508 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "OneStopShopApp/Custom Cell/ListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		81B7605E204A117000A4E53E /* OneStopShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneStopShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B76061204A117000A4E53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81B76068204A117000A4E53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		81A6D7B5204B06AA00FC5A22 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
 		81B76055204A117000A4E53E = {
 			isa = PBXGroup;
 			children = (
@@ -98,9 +108,9 @@
 		81B76060204A117000A4E53E /* OneStopShopApp */ = {
 			isa = PBXGroup;
 			children = (
+				81A6D7B5204B06AA00FC5A22 /* Custom Cell */,
 				814834AB204B00E900533508 /* Network */,
 				81B76077204A4DFD00A4E53E /* Models */,
-				81B76076204A4DED00A4E53E /* CustomCells */,
 				81B76075204A4DE700A4E53E /* Views */,
 				81B76074204A4DDC00A4E53E /* ViewControllers */,
 				81B76061204A117000A4E53E /* AppDelegate.swift */,
@@ -131,13 +141,6 @@
 				81D852B1204AF42100987370 /* FavoritesView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		81B76076204A4DED00A4E53E /* CustomCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		81B76077204A4DFD00A4E53E /* Models */ = {
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */,
 				81D852B6204AF44B00987370 /* DetailViewController.swift in Sources */,
 				81D852A8204AF35600987370 /* SearchViewController.swift in Sources */,
 				81D852B0204AF40F00987370 /* DetailView.swift in Sources */,
