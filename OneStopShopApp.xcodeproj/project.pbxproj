@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3FF27EEC705EC3DE705AE5A6 /* Pods_OneStopShopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2990536364BECF8296150EB /* Pods_OneStopShopApp.framework */; };
+		81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */; };
 		81B76062204A117000A4E53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B76061204A117000A4E53E /* AppDelegate.swift */; };
 		81B76069204A117000A4E53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B76068204A117000A4E53E /* Assets.xcassets */; };
 		81B7606C204A117000A4E53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B7606A204A117000A4E53E /* LaunchScreen.storyboard */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		7AABE6ECBBF01E94668DB671 /* Pods-OneStopShopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneStopShopApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneStopShopApp/Pods-OneStopShopApp.release.xcconfig"; sourceTree = "<group>"; };
+		81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = OneStopShopApp/ListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		81B7605E204A117000A4E53E /* OneStopShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneStopShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B76061204A117000A4E53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81B76068204A117000A4E53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		81B76076204A4DED00A4E53E /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */,
 				81D852B6204AF44B00987370 /* DetailViewController.swift in Sources */,
 				81D852A8204AF35600987370 /* SearchViewController.swift in Sources */,
 				81D852B0204AF40F00987370 /* DetailView.swift in Sources */,

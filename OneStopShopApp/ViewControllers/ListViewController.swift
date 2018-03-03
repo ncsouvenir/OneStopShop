@@ -10,10 +10,25 @@ import UIKit
 
 class ListViewController: UIViewController {
 
+    
+    lazy var ListTableView: UITableView = {
+        let tv = UITableView()
+        tv.register(ListTableViewCell.self, forCellReuseIdentifier: "ListCell")
+        return tv
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ListTableView.dataSource = self
+        //ListTableView.delegate = self
+        //configureNavigation()
+        ListTableView.rowHeight = 97.5
+
+        
 
         // Do any additional setup after loading the view.
+    }
+    private func configureNavigation(){
+                navigationItem.title = "List VC it is for now"
     }
 
     override func didReceiveMemoryWarning() {
