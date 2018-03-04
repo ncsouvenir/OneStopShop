@@ -137,7 +137,6 @@ class DetailViewController: UITableViewController {
         case #imageLiteral(resourceName: "002-star"):
             PersistantManager.manager.addFavorite(newJob: self.jobCenter)
             animateStar()
-//            showAlert(title: "Added", message: "Successfully added the resource center to favorites.")
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "001-star-1"), style: .plain, target: self, action:  #selector(favoriteButtonPressed))
         default:
             showAlert(title: "Already favorited", message: "This resource center is already favorited")
@@ -151,19 +150,24 @@ class DetailViewController: UITableViewController {
     }
     func animateStar() {
         let animation = CABasicAnimation(keyPath: "position")
+        animation.delegate = self
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.fromValue = starView.alpha = 0
         animation.toValue = starView.alpha = 1
-        animation.fromValue = self.starView.layer.position
+        //animation.fromValue = self.starView.layer.position
         animation.toValue = CGPoint(x: UIScreen.main.bounds.width - 100, y: UIScreen.main.bounds.height)
         animation.duration = 1
         animation.repeatCount = 1
       starView.layer.add(animation, forKey: nil)
-        starView.alpha = 0
     }
     
 
     
+}
+
+extension DetailViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        starView.alpha = 0
+    }
 }
 
 

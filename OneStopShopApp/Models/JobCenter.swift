@@ -31,7 +31,8 @@ struct JobCenter: Codable {
     }
     
     var coordinate: CLLocationCoordinate2D {
-        guard let latDouble = Double(latitude), let longDouble = Double(longitude) else {return CLLocationCoordinate2DMake(0, 0)}
+        guard let lat = latitude, let long = longitude else {return CLLocationCoordinate2DMake(0.0, 0.0)}
+        guard let latDouble = Double(lat), let longDouble = Double(long) else {return CLLocationCoordinate2DMake(0.0, 0.0)}
         return CLLocationCoordinate2DMake(latDouble, longDouble)
         
     }
