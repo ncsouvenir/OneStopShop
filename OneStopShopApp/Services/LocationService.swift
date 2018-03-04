@@ -12,9 +12,12 @@ import CoreLocation
 import  MapKit
 // CLLocation has points: lat and long
 class LocationService: NSObject {
+    
+    var searchView = SearchView()
     //BP: Apple highly recommends having one instance of the location manager
     private override init(){
         super.init()
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
@@ -63,18 +66,19 @@ extension LocationService: CLLocationManagerDelegate {
     
     //called every time user updates location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("did update with CLLocation \(locations)")
+        guard let userLocation: CLLocation = locations.last else { print("no location data"); return }
+        print("didUpdateLocations: \(locations)")
+        //print("locations = \(location.latitude) \(location.longitude)")
+        //manager.stopUpdatingLocation()
         
-        //        let location = CLLocationCoordinate2D(latitude: 35.689949, longitude: 139.697576)
-        //        let center = location
-        //        let region = MKCoordinateRegionMake(center, MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025))
-        //        pokemonMap.setRegion(region, animated: true)
-        
-        guard let location = locations.last else {print("no location data");return}
-        
+        let coordinations = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude,longitude: userLocation.coordinate.longitude)
+        let span = MKCoordinateSpanMake(0.2,0.2)
+        let region = MKCoordinateRegion(center: coordinations, span: span)
+        searchView.mapView.setRegion(region, animated: true)
+
         //Update User Preferences: sets users last location as the location when you open the app back up
-        UserDefaultsHelper.manager.setLatitude(latitude: location.coordinate.latitude)
-        UserDefaultsHelper.manager.setLongitude(longitude: location.coordinate.longitude)
+        UserDefaultsHelper.manager.setLatitude(latitude: userLocation.coordinate.latitude)
+        UserDefaultsHelper.manager.setLongitude(longitude: userLocation.coordinate.longitude)
         //locationManager.stopUpdatingLocation()
     }
     

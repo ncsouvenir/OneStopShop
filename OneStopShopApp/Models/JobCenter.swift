@@ -13,8 +13,8 @@ struct JobCenter: Codable {
     let comments: String?
     let facilityName: String?
     let city: String
-    let latitude: String
-    let longitude: String
+    let latitude: String?
+    let longitude: String?
     let zipCode: String
     let phoneNumber: String
     enum CodingKeys: String, CodingKey {
