@@ -25,6 +25,8 @@ class DetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavBar()
+        self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
        self.contentComponents = ContentFactory.getContentComponents(jobCenter: jobCenter)
     }
 
@@ -60,9 +62,16 @@ class DetailViewController: UITableViewController {
     }
     
     @objc func favoriteButtonPressed() {
-        
+        PersistantManager.manager.addFavorite(newJob: self.jobCenter)
+        showAlert()
     }
-
+    func showAlert() {
+        let alert = UIAlertController(title: "Added", message: "Successfully added the job center to favorites.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 

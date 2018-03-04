@@ -18,23 +18,24 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        navigationController?.title = "Favorites"
         favoritesView.FavoritesTableView.dataSource = self
         favoritesView.FavoritesTableView.delegate = self
         favoritesView.FavoritesTableView.rowHeight = 100
         configureNavigation()
         addConstraints()
         loadData()
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.jobCenters = PersistantManager.manager.getFavotites()
     }
     
     private func loadData(){
-        
+        self.jobCenters = PersistantManager.manager.getFavotites()
     }
     
     private func configureNavigation(){
-        view.backgroundColor = .blue
         navigationItem.title = "Favorite Centers "
     }
     
@@ -47,7 +48,11 @@ class FavoritesViewController: UIViewController {
     
 }
 extension FavoritesViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedJobCenter = jobCenters[indexPath.row]
+        let detailVC = DetailViewController(jobCenter: selectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

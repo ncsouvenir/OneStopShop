@@ -34,7 +34,6 @@ class ListTableViewCell: UITableViewCell {
 
     func configureCell(jobCenter:JobCenter) {
         centerNameLabel.text = jobCenter.facilityName
-        cityLabel.text = jobCenter.city
         }
     
     private func setupViews() {
