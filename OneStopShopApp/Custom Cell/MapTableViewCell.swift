@@ -21,7 +21,8 @@ class MapTableViewCell: UITableViewCell {
     lazy var directionsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Get Directions", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .blue
         return button
     }()
     

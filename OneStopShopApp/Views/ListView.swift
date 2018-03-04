@@ -38,8 +38,8 @@ class ListView: UIView {
     }
     
     private func setupViews(){
-        addSubview(listTableView)
         addSubview(listImageView)
+        addSubview(listTableView)
        
         
         listImageView.snp.makeConstraints { (make) in
