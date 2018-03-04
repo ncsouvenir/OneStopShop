@@ -21,13 +21,13 @@ class SearchView: UIView {
     
     let boroughArray: [String] = ["Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"]
     
-    lazy var zipCodeSearchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Queens NY"
-        searchBar.barTintColor = .white
-        return searchBar
-    }()
-    
+//    lazy var zipCodeSearchBar: UISearchBar = {
+//        let searchBar = UISearchBar()
+//        searchBar.placeholder = "Queens NY"
+//        searchBar.barTintColor = .white
+//        return searchBar
+//    }()
+//
 
     lazy var segmentedControl: UISegmentedControl = {
         let segControl = UISegmentedControl(items: boroughArray)
@@ -61,7 +61,7 @@ class SearchView: UIView {
     
     func setupViews() {
         setupVenueSearchBar()
-        setupZipCodeSearchBar()
+        //setupZipCodeSearchBar()
         setupSegmentedControl()
         setupMapView()
 
@@ -72,21 +72,21 @@ class SearchView: UIView {
         //search bar constraints
     }
     
-    func setupZipCodeSearchBar() {
-        addSubview(zipCodeSearchBar)
-        self.zipCodeSearchBar.snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
-            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
-            make.height.equalTo(40)
-        }
-    }
+//    func setupZipCodeSearchBar() {
+//        addSubview(zipCodeSearchBar)
+//        self.zipCodeSearchBar.snp.makeConstraints { (make) in
+//            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+//            make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
+//            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
+//            make.height.equalTo(40)
+//        }
+//    }
     
     func setupSegmentedControl() {
 
         addSubview(segmentedControl)
         self.segmentedControl.snp.makeConstraints { (make) in
-            make.top.equalTo(zipCodeSearchBar.snp.bottom)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(snp.leading)
             make.trailing.equalTo(snp.trailing)
             //make.bottom.equalTo(snp.bottom)
@@ -94,12 +94,10 @@ class SearchView: UIView {
         }
     }
     
-
-    
     func setupMapView() {
         addSubview(mapView)
         self.mapView.snp.makeConstraints { (make) in
-            make.top.equalTo(segmentedControl.snp.bottom)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
             make.leading.equalTo(snp.leading)
             make.trailing.equalTo(snp.trailing)
             make.bottom.equalTo(snp.bottom)

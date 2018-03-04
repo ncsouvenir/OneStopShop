@@ -7,9 +7,11 @@
 //
 
 import Foundation
+
 struct JobCenterAPIClient {
     private init() {}
     static let manager = JobCenterAPIClient()
+    
     func getResources(with zip: String, completionHandler: @escaping ([JobCenter]) -> Void, errorHandler: @escaping (Error) -> Void) {
         guard let formattedZip = zip.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
             errorHandler(AppError.badURL(str: zip))
@@ -51,7 +53,6 @@ struct JobCenterAPIClient {
             do {
                 let results = try JSONDecoder().decode([JobCenter].self, from: data)
                 completionHandler(results)
-                
             }
             catch {
                 errorHandler(AppError.codingError(rawError: error))
