@@ -13,6 +13,7 @@
 		814834B1204B014D00533508 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B0204B014D00533508 /* AppError.swift */; };
 		814834B3204B218700533508 /* ContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B2204B218700533508 /* ContentFactory.swift */; };
 		814834B5204B320800533508 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B4204B320800533508 /* DetailTableViewCell.swift */; };
+		818F21BC204C46EF0074515C /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818F21BB204C46EF0074515C /* ImageResizer.swift */; };
 		81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */; };
 		81B62E1F204B5ABF003657AD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E1E204B5ABF003657AD /* PersistanceManager.swift */; };
 		81B62E22204B5BDF003657AD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E21204B5BDF003657AD /* LocationService.swift */; };
@@ -40,6 +41,7 @@
 		814834B0204B014D00533508 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		814834B2204B218700533508 /* ContentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFactory.swift; sourceTree = "<group>"; };
 		814834B4204B320800533508 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		818F21BB204C46EF0074515C /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "OneStopShopApp/Custom Cell/ListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		81B62E1E204B5ABF003657AD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		81B62E21204B5BDF003657AD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				81B62E21204B5BDF003657AD /* LocationService.swift */,
+				818F21BB204C46EF0074515C /* ImageResizer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				814834AD204B010000533508 /* NetworkHelper.swift in Sources */,
 				81D852AE204AF3DA00987370 /* ListView.swift in Sources */,
 				814834B5204B320800533508 /* DetailTableViewCell.swift in Sources */,
+				818F21BC204C46EF0074515C /* ImageResizer.swift in Sources */,
 				81D852B2204AF42100987370 /* FavoritesView.swift in Sources */,
 				81B62E24204B5C15003657AD /* UserDefaults.swift in Sources */,
 				81D852AC204AF3BE00987370 /* JobCenter.swift in Sources */,
@@ -477,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2B2G4E5HKD;
 				INFOPLIST_FILE = OneStopShopApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.AC4.3.OneStopShopApp;
@@ -492,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2B2G4E5HKD;
 				INFOPLIST_FILE = OneStopShopApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4q.AC4.3.OneStopShopApp;

@@ -110,8 +110,6 @@ extension ListViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-
-    
 }
 
     
