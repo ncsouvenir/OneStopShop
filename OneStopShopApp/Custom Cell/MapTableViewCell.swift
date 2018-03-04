@@ -18,6 +18,13 @@ class MapTableViewCell: UITableViewCell {
         return mv
     }()
     
+    lazy var directionsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Get Directions", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        return button
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "MapCell")
         setUpView()
@@ -28,17 +35,30 @@ class MapTableViewCell: UITableViewCell {
     }
     
     func setUpView() {
+        setupDirectonsButton()
         setUpMap()
+
     }
     
     func setUpMap() {
         addSubview(mapV)
         mapV.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(directionsButton.snp.top).offset(-20)
             make.left.equalTo(safeAreaLayoutGuide).offset(5)
             make.right.equalTo(safeAreaLayoutGuide).offset(-5)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            
+            //make.bottom.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self.snp.centerX)
+        }
+    }
+    
+    func setupDirectonsButton() {
+        addSubview(directionsButton)
+        directionsButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            //make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(8)
         }
     }
     

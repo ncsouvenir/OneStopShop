@@ -64,6 +64,7 @@ class DetailViewController: UITableViewController {
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapTableViewCell
+            cell.directionsButton.addTarget(self, action: #selector(showDirections), for: .touchUpInside)
             let annotation = MKPointAnnotation()
             annotation.coordinate = jobCenter.coordinate
             cell.mapV.addAnnotation(annotation)
@@ -82,7 +83,7 @@ class DetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 4:
-            return 150
+            return 250
         default:
             return 50
         }
@@ -91,6 +92,19 @@ class DetailViewController: UITableViewController {
     
     func configureNavBar() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(favoriteButtonPressed))
+    }
+    
+    
+    @objc func showDirections() {
+        let userCoordinate = CLLocationCoordinate2DMake(UserDefaultsHelper.manager.getLatitude(), UserDefaultsHelper.manager.getLongitude())
+        let placeCoordinate = jobCenter.coordinate
+        let directionsURLString = "http://maps.apple.com/?saddr=\(userCoordinate.latitude),\(userCoordinate.longitude)&daddr=\(placeCoordinate.latitude),\(placeCoordinate.longitude)"
+        
+        let url = URL(string: directionsURLString)!
+        UIApplication.shared.open(url, options: [:]) { (done) in
+            print("launched apple maps")
+        }
+        
     }
     
     @objc func favoriteButtonPressed() {
