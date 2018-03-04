@@ -77,11 +77,13 @@ extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
        if !jobCenters.isEmpty {
         if editingStyle == .delete {
+            tableView.beginUpdates()
+            jobCenters.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             PersistantManager.manager.removeFavorite(from: indexPath.row)
-            self.jobCenters.remove(at: indexPath.row)
+            tableView.endUpdates()
         }
     }
-    
 }
 
 }
