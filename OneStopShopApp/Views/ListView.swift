@@ -18,16 +18,10 @@ class ListView: UIView {
     }()
     lazy var listImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "placeholder copy")
+        imageView.image = #imageLiteral(resourceName: "Queens")
         return imageView
     }()
-    
-//    lazy var cityLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Place holder"
-//        label.numberOfLines = 0
-//        return label
-//    }()
+ 
 
     override init(frame: CGRect) {
         super.init(frame: frame)

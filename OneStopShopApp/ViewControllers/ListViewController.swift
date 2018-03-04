@@ -28,7 +28,6 @@ class ListViewController: UIViewController {
         //listView.ListTableView.rowHeight = 50
 
         view.addSubview(listView)
-   
         configureNavigation()
         addConstraints()
        // loadData()
@@ -45,13 +44,14 @@ class ListViewController: UIViewController {
     }
     
     private func configureNavigation(){
+
             navigationItem.title = jobCenters.first?.borough
         
         
     }
     
     private func addConstraints(){
-     view.addSubview(listView)
+        view.addSubview(listView)
         listView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.snp.edges)
         }
@@ -61,7 +61,6 @@ class ListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
 
 //Extensions
@@ -89,5 +88,14 @@ extension ListViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedJobCenter = jobCenters[indexPath.row]
+        let detailVC = DetailViewController(jobCenter: selectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
+
+    
+    
+    
+
