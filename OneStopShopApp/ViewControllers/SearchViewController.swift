@@ -67,7 +67,7 @@ class SearchViewController: UIViewController {
         setupNavBar()
         //set up delegates
         searchView.mapView.delegate = self
-        searchView.zipCodeSearchBar.delegate = self
+        //searchView.zipCodeSearchBar.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
 
         askUserForPermission()
