@@ -28,11 +28,13 @@ class SearchView: UIView {
         return searchBar
     }()
     
+
     lazy var segmentedControl: UISegmentedControl = {
         let segControl = UISegmentedControl(items: boroughArray)
         segControl.backgroundColor = UIColor.white
         return segControl
     }()
+
     
     lazy var mapView: MKMapView = {
         let map = MKMapView()
@@ -60,15 +62,15 @@ class SearchView: UIView {
     func setupViews() {
         setupVenueSearchBar()
         setupZipCodeSearchBar()
-        setupMapView()
         setupSegmentedControl()
+        setupMapView()
+
     }
     
     
     func setupVenueSearchBar() {
         //search bar constraints
     }
-    
     
     func setupZipCodeSearchBar() {
         addSubview(zipCodeSearchBar)
@@ -81,6 +83,7 @@ class SearchView: UIView {
     }
     
     func setupSegmentedControl() {
+
         addSubview(segmentedControl)
         self.segmentedControl.snp.makeConstraints { (make) in
             make.top.equalTo(zipCodeSearchBar.snp.bottom)
@@ -91,6 +94,7 @@ class SearchView: UIView {
         }
     }
     
+
     
     func setupMapView() {
         addSubview(mapView)
