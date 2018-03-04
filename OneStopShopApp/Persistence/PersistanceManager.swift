@@ -66,11 +66,15 @@ class PersistantManager {
         }
         return nil
     }
-    // get venues
+   
     func getFavotites() -> [JobCenter]{
         return favorites
     }
-    // add venues, save image to file
+    
+    func removeFavorite(from index: Int) {
+        favorites.remove(at: index)
+    }
+    // add jobCenter, save image to file
     func addFavorite(newJob: JobCenter) {
         // check venue already saved or not
         let index = favorites.index(where: {newJob.phoneNumber == $0.phoneNumber})

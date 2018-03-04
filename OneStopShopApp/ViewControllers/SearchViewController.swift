@@ -165,8 +165,8 @@ extension SearchViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //present the detail view controller
-        let listVC = ListViewController()
-        present(listVC, animated: true, completion: nil)
+        let detailVC = DetailViewController(jobCenter: currentSelectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
         print("This is going to the List View Controller")
     }
 }
