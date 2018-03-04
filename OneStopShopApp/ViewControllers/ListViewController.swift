@@ -22,7 +22,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
         //listView.ListTableView.rowHeight = 50
@@ -30,24 +30,46 @@ class ListViewController: UIViewController {
         view.addSubview(listView)
         configureNavigation()
         addConstraints()
-       // loadData()
+        loadBoroughPicture()
 
     }
     
-    private func loadData(){
+    private func loadBoroughPicture(){
+        if let firstBorough = jobCenters.first {
+        switch firstBorough.borough {
+        case "Manhattan":
+            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Manhattan")
+        case "Bronx":
+            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Bronx")
+        case "Brooklyn":
+            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Brooklyn")
+        case "Queens":
+            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Queens")
+        case "Staten Island":
+            listView.listImageView.image = #imageLiteral(resourceName: "Pict_StatenIsland")
+        default:
+            break
+        }
+        } else {
+            listView.listImageView.image = #imageLiteral(resourceName: "placeholder copy")
+        }
+    }
 //        JobCenterAPIClient.manager.getResources(with: "11220", completionHandler: { (onlineJobCenters) in
 //            self.jobCenters = onlineJobCenters
 //        }, errorHandler: {print ($0)})
-        JobCenterAPIClient.manager.getResourcesByBorough(with: "Brooklyn", completionHandler: { (onlineJobCenter) in
-            self.jobCenters = onlineJobCenter
-        }, errorHandler: {print($0)})
-    }
+//        JobCenterAPIClient.manager.getResourcesByBorough(with: "Brooklyn", completionHandler: { (onlineJobCenter) in
+//            self.jobCenters = onlineJobCenter
+//        }, errorHandler: {print($0)})
+        
+   // }
     
     private func configureNavigation(){
 
-            navigationItem.title = jobCenters.first?.borough
-        
-        
+        navigationItem.title = jobCenters.first?.borough
+        navigationItem.leftItemsSupplementBackButton = false
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     private func addConstraints(){
@@ -82,12 +104,12 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell {
             let jobCenter = jobCenters[indexPath.row]
+            
             cell.configureCell(jobCenter: jobCenter)
             return cell
         }
         return UITableViewCell()
     }
-    
    
 }
 
