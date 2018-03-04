@@ -24,7 +24,6 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
-        //listView.ListTableView.rowHeight = 50
         configureNavigation()
         addConstraints()
         loadData()
@@ -41,12 +40,12 @@ class ListViewController: UIViewController {
     }
     
     private func configureNavigation(){
-        view.backgroundColor = .red
+        view.backgroundColor = .white
             navigationItem.title = jobCenters.first?.borough
     }
     
     private func addConstraints(){
-     view.addSubview(listView)
+        view.addSubview(listView)
         listView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.snp.edges)
         }
@@ -79,6 +78,5 @@ extension ListViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
     
 }
