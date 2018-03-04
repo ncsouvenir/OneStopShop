@@ -67,7 +67,7 @@ class SearchViewController: UIViewController {
         setupNavBar()
         //set up delegates
         searchView.mapView.delegate = self
-        searchView.zipCodeSearchBar.delegate = self
+        //searchView.zipCodeSearchBar.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
 
         askUserForPermission()
@@ -167,8 +167,8 @@ extension SearchViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //present the detail view controller
-        let listVC = ListViewController()
-        present(listVC, animated: true, completion: nil)
+        let detailVC = DetailViewController(jobCenter: currentSelectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
         print("This is going to the List View Controller")
     }
 }

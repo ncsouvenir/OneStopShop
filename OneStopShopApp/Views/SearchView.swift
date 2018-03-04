@@ -55,7 +55,7 @@ class SearchView: UIView {
     }
     
     func commonInit() {
-        backgroundColor = .purple
+        backgroundColor = .blue
         setupViews()
     }
     
@@ -99,7 +99,7 @@ class SearchView: UIView {
     func setupMapView() {
         addSubview(mapView)
         self.mapView.snp.makeConstraints { (make) in
-            make.top.equalTo(zipCodeSearchBar.snp.bottom)
+            make.top.equalTo(segmentedControl.snp.bottom)
             make.leading.equalTo(snp.leading)
             make.trailing.equalTo(snp.trailing)
             make.bottom.equalTo(snp.bottom)
