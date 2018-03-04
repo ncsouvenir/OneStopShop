@@ -55,7 +55,7 @@ class SearchView: UIView {
     }
     
     func commonInit() {
-        backgroundColor = .purple
+        backgroundColor = .blue
         setupViews()
     }
     

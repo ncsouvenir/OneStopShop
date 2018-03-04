@@ -13,7 +13,13 @@ class DetailViewController: UITableViewController {
 
     var jobCenter: JobCenter!
     var contentComponents = [ContentComponents]()
-    
+    lazy var starView: UIImageView = {
+        let star = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        star.image = #imageLiteral(resourceName: "001-favorite")
+        star.backgroundColor = .clear
+        star.alpha = 0
+        return star
+    }()
     init(jobCenter: JobCenter) {
         super.init(nibName: nil, bundle: nil)
         self.jobCenter = jobCenter
@@ -27,12 +33,25 @@ class DetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
+        setStarConstrain()
         self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: "MapCell")
         self.tableView.register(PhoneTableViewCell.self, forCellReuseIdentifier: "PhoneCell")
        self.contentComponents = ContentFactory.getContentComponents(jobCenter: jobCenter)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavBar()
+    }
 
+    private func setStarConstrain() {
+        view.addSubview(starView)
+        starView.translatesAutoresizingMaskIntoConstraints = false
+        starView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        starView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: (UIScreen.main.bounds.width / 2) - 35).isActive = true
+        starView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        starView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -92,7 +111,12 @@ class DetailViewController: UITableViewController {
     
     
     func configureNavBar() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(favoriteButtonPressed))
+       let index = PersistantManager.manager.getFavotites().index(where: {self.jobCenter.phoneNumber == $0.phoneNumber})
+        if index == nil {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "002-star"), style: .plain, target: self, action:  #selector(favoriteButtonPressed))
+        } else {
+         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "001-star-1"), style: .plain, target: self, action:  #selector(favoriteButtonPressed))
+        }
     }
     
     
@@ -109,15 +133,36 @@ class DetailViewController: UITableViewController {
     }
     
     @objc func favoriteButtonPressed() {
-        PersistantManager.manager.addFavorite(newJob: self.jobCenter)
-        showAlert()
+        switch navigationItem.rightBarButtonItem!.image! {
+        case #imageLiteral(resourceName: "002-star"):
+            PersistantManager.manager.addFavorite(newJob: self.jobCenter)
+            animateStar()
+//            showAlert(title: "Added", message: "Successfully added the resource center to favorites.")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "001-star-1"), style: .plain, target: self, action:  #selector(favoriteButtonPressed))
+        default:
+            showAlert(title: "Already favorited", message: "This resource center is already favorited")
+        }
     }
-    func showAlert() {
-        let alert = UIAlertController(title: "Added", message: "Successfully added the job center to favorites.", preferredStyle: .alert)
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
+    func animateStar() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.fromValue = starView.alpha = 0
+        animation.toValue = starView.alpha = 1
+        animation.fromValue = self.starView.layer.position
+        animation.toValue = CGPoint(x: UIScreen.main.bounds.width - 100, y: UIScreen.main.bounds.height)
+        animation.duration = 1
+        animation.repeatCount = 1
+      starView.layer.add(animation, forKey: nil)
+        starView.alpha = 0
+    }
+    
+
     
 }
 
