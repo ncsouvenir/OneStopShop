@@ -35,5 +35,12 @@ struct JobCenter: Codable {
         return CLLocationCoordinate2DMake(latDouble, longDouble)
         
     }
+    var primaryPhoneNumber: String {
+        let phoneArr = phoneNumber.components(separatedBy: "/")
+        guard let phoneNumber = phoneArr.first else {return "N/A"}
+        return phoneNumber
+        
+    }
+    
     
 }

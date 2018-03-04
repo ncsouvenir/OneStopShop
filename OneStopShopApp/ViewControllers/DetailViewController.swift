@@ -29,6 +29,7 @@ class DetailViewController: UITableViewController {
         configureNavBar()
         self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: "MapCell")
+        self.tableView.register(PhoneTableViewCell.self, forCellReuseIdentifier: "PhoneCell")
        self.contentComponents = ContentFactory.getContentComponents(jobCenter: jobCenter)
     }
 
@@ -51,10 +52,10 @@ class DetailViewController: UITableViewController {
             cell.rightTextLabel.text = content.detail
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneCell", for: indexPath) as! PhoneTableViewCell
             let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Phone Number"
-            cell.rightTextLabel.text = content.detail
+            cell.phoneTextView.text = content.detail
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
