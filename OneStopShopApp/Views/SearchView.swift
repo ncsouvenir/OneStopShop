@@ -19,6 +19,8 @@ class SearchView: UIView {
     //        return searchBar
     //    }()
     
+    let boroughArray: [String] = ["Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"]
+    
     lazy var zipCodeSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Queens NY"
@@ -26,15 +28,13 @@ class SearchView: UIView {
         return searchBar
     }()
     
-    //    lazy var segmentedControl: UISegmentedControl = {
-    //        let segControl = UISegmentedControl()
-    //        segControl.setTitle("Brooklyn", forSegmentAt: 0)
-    //        segControl.setTitle("Queens", forSegmentAt: 1)
-    //        segControl.setTitle("Manhattan", forSegmentAt: 2)
-    //        segControl.setTitle("Bronx", forSegmentAt: 3)
-    //        segControl.setTitle("Staten Island", forSegmentAt: 4)
-    //        return segControl
-    //    }()
+
+    lazy var segmentedControl: UISegmentedControl = {
+        let segControl = UISegmentedControl(items: boroughArray)
+        segControl.backgroundColor = UIColor.white
+        return segControl
+    }()
+
     
     lazy var mapView: MKMapView = {
         let map = MKMapView()
@@ -62,15 +62,15 @@ class SearchView: UIView {
     func setupViews() {
         setupVenueSearchBar()
         setupZipCodeSearchBar()
+        setupSegmentedControl()
         setupMapView()
-        // setupSegmentedControl()
+
     }
     
     
     func setupVenueSearchBar() {
         //search bar constraints
     }
-    
     
     func setupZipCodeSearchBar() {
         addSubview(zipCodeSearchBar)
@@ -79,24 +79,22 @@ class SearchView: UIView {
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
             make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
             make.height.equalTo(40)
-            
         }
     }
     
-    //    func setupSegmentedControl() {
-    //        addSubview(segmentedControl)
-    //        self.segmentedControl.snp.makeConstraints { (make) in
-    //            make.top.equalTo(zipCodeSearchBar.snp.bottom)
-    //            make.leading.equalTo(snp.leading)
-    //            make.trailing.equalTo(snp.trailing)
-    //            //make.bottom.equalTo(snp.bottom)
-    //            make.height.equalTo(50)
-    //
-    //
-    //        }
-    //    }
+    func setupSegmentedControl() {
+
+        addSubview(segmentedControl)
+        self.segmentedControl.snp.makeConstraints { (make) in
+            make.top.equalTo(zipCodeSearchBar.snp.bottom)
+            make.leading.equalTo(snp.leading)
+            make.trailing.equalTo(snp.trailing)
+            //make.bottom.equalTo(snp.bottom)
+            make.height.equalTo(40)
+        }
+    }
     
-    
+
     
     func setupMapView() {
         addSubview(mapView)
@@ -108,18 +106,4 @@ class SearchView: UIView {
             
         }
     }
-    
-    
-    
-    //    func setupCollectionView() {
-    //        self.addSubview(collectionView)
-    //        self.collectionView.snp.remakeConstraints { (make) -> Void in
-    //            make.leading.equalToSuperview()
-    //            make.trailing.equalToSuperview()
-    //            make.height.equalToSuperview().dividedBy(5)
-    //            make.bottom.equalTo(mapView.snp.bottom).offset(-50)
-    //
-    //
-    //        }
-    //    }
 }

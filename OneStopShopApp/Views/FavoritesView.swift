@@ -26,7 +26,7 @@ class FavoritesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = .blue
         setupViews()
     }
     
@@ -34,7 +34,7 @@ class FavoritesView: UIView {
         addSubview(FavoritesTableView)
         
         FavoritesTableView.snp.makeConstraints { (tableView) in
-            tableView.edges.equalTo(snp.edges)
+            tableView.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
     }
 

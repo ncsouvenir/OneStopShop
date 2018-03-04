@@ -22,11 +22,15 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
+        //listView.ListTableView.rowHeight = 50
+
+        view.addSubview(listView)
         configureNavigation()
         addConstraints()
-        loadData()
+       // loadData()
 
     }
     
@@ -40,8 +44,10 @@ class ListViewController: UIViewController {
     }
     
     private func configureNavigation(){
-        view.backgroundColor = .white
+
             navigationItem.title = jobCenters.first?.borough
+        
+        
     }
     
     private func addConstraints(){
@@ -62,7 +68,11 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedJobCenter = jobCenters[indexPath.row]
+        let detailVC = DetailViewController(jobCenter: selectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
