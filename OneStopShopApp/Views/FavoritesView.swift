@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoritesView: UIView {
-    
+
     lazy var FavoritesTableView: UITableView = {
         let tv = UITableView()
         tv.register(ListTableViewCell.self, forCellReuseIdentifier: "FavoritesCell")
@@ -19,6 +19,7 @@ class FavoritesView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,6 +37,11 @@ class FavoritesView: UIView {
             tableView.edges.equalTo(snp.edges)
         }
     }
-    
-}
+
+
+    }
+
+
+
+
 
