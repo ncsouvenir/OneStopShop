@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
         
         favoritesView.FavoritesTableView.dataSource = self
         favoritesView.FavoritesTableView.delegate = self
-        favoritesView.FavoritesTableView.rowHeight = 100
+        //favoritesView.FavoritesTableView.rowHeight = 100
         configureNavigation()
         addConstraints()
         loadData()

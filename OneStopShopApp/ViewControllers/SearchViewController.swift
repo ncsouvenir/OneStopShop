@@ -16,22 +16,40 @@ class SearchViewController: UIViewController {
     let searchView = SearchView()
     var currentSelectedJobCenter: JobCenter!
     private var annotations = [MKAnnotation]()
-    
-    //var pointAnnotation: CustomPointAnnotation!
     var pinAnnotationView: MKPinAnnotationView!
+    
+    var currentSelectedIndex: Int = 0 {
+        didSet{
+            let titleAtSelectedIndex = searchView.boroughArray[currentSelectedIndex]
+            let loadJobCentersFromInternet: ([JobCenter]) -> Void = {(onlineJobCenters:[JobCenter]) in
+                DispatchQueue.main.async {
+                    self.jobCenters.removeAll()
+                    self.searchView.mapView.removeAnnotations(self.annotations)
+                    self.annotations.removeAll()
+                    self.jobCenters = onlineJobCenters
+                    if self.jobCenters.isEmpty{
+                        self.noJobCentersAlert()
+                    }
+                }
+            }
+            JobCenterAPIClient.manager.getResourcesByBorough(with: titleAtSelectedIndex,
+                                                             completionHandler: loadJobCentersFromInternet,
+                                                             errorHandler: {print($0)})
+        }
+    }
     
     var jobCenters = [JobCenter](){
         didSet{
             // creating annotations
             for jobCenter in jobCenters {
                 let annotation = MKPointAnnotation()
-                                annotation.coordinate = CLLocationCoordinate2DMake(Double(jobCenter.latitude)!,
-                                                                                   Double(jobCenter.longitude)!)
-//                CLGeocoder().geocodeAddressString(jobCenter.streetAddress, completionHandler: { (placeMarks, error) in
-//                    if let thisPlace = placeMarks?.last {
-//                        annotation.coordinate = thisPlace.location!.coordinate
-//                    }
-//                })
+                annotation.coordinate = CLLocationCoordinate2DMake(Double(jobCenter.latitude)!,
+                                                                   Double(jobCenter.longitude)!)
+                //                CLGeocoder().geocodeAddressString(jobCenter.streetAddress, completionHandler: { (placeMarks, error) in
+                //                    if let thisPlace = placeMarks?.last {
+                //                        annotation.coordinate = thisPlace.location!.coordinate
+                //                    }
+                //                })
                 annotation.title = jobCenter.facilityName //this is the name that will show right unser the pin
                 annotations.append(annotation)
             }
@@ -49,8 +67,27 @@ class SearchViewController: UIViewController {
         setupNavBar()
         //set up delegates
         searchView.mapView.delegate = self
-        searchView.zipCodeSearchBar.delegate = self
+        //searchView.zipCodeSearchBar.delegate = self
         askUserForPermission()
+        searchView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+    }
+    
+    //"Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"
+    @objc func segmentedControlValueChanged(segControl: UISegmentedControl){
+        switch segControl.selectedSegmentIndex{
+        case 0:
+            currentSelectedIndex = 0
+        case 1:
+            currentSelectedIndex = 1
+        case 2:
+            currentSelectedIndex = 2
+        case 3:
+            currentSelectedIndex = 3
+        case 4:
+            currentSelectedIndex = 4
+        default:
+            print("This job center does not belong to  borough")
+        }
     }
     
     func askUserForPermission(){
@@ -60,8 +97,7 @@ class SearchViewController: UIViewController {
     func setupNavBar(){
         navigationItem.title = "One-Stop-Shop"
         //Add right bar button
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "listIcon"), style: .plain, target: self, action: #selector(showListView))
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(showListView))
     }
     
     @objc func showListView(){
@@ -124,51 +160,34 @@ extension SearchViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //present the detail view controller
+        let listVC = ListViewController()
+        present(listVC, animated: true, completion: nil)
         print("This is going to the List View Controller")
     }
 }
 
 //MARK: Search bar delegate
-extension SearchViewController: UISearchBarDelegate{
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        //validating the search by zipCode
-        guard let text = searchView.zipCodeSearchBar.text else {print("job center search is nil");return}
-        guard !text.isEmpty else {print("job center search is empty");return}
-        guard let encodedJobCenterSearch = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {print("");return}
-        //TODO: give error alert if no job centers exist
-        
-        if text.count != 5 {
-            searchBar.text = ""
-            //invalidZipCodeAlert()
-            print("Invalid zipCode")
-        }
-        
-        if text < String(00501) && text > String(99950) {
-            //unknownZipCodeAlert()
-            print("Unknown zipcode")
-        }
-        
-        //completion
-        let loadJobCentersFromInternet: ([JobCenter]) -> Void = {(onlineJobCenters:[JobCenter]) in
-            DispatchQueue.main.async {
-                
-                self.jobCenters.removeAll()
-                self.searchView.mapView.removeAnnotations(self.annotations)
-                self.annotations.removeAll()
-                self.jobCenters = onlineJobCenters
-                if self.jobCenters.isEmpty{
-                    self.noJobCentersAlert()
-                }
-                
-            }
-        }
-        //call API
-        JobCenterAPIClient.manager.getResources(with: encodedJobCenterSearch,
-                                                completionHandler: loadJobCentersFromInternet,
-                                                errorHandler: {print($0)})
-    }
-}
+//extension SearchViewController: UISearchBarDelegate{
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.resignFirstResponder()
+//        //validating the search by zipCode
+//        guard let text = searchView.zipCodeSearchBar.text else {print("job center search is nil");return}
+//        guard !text.isEmpty else {print("job center search is empty");return}
+//        guard let encodedJobCenterSearch = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {print("");return}
+//        //TODO: give error alert if no job centers exist
+//
+//        if text.count != 5 {
+//            searchBar.text = ""
+//            //invalidZipCodeAlert()
+//            print("Invalid zipCode")
+//        }
+//
+//        if text < String(00501) && text > String(99950) {
+//            //unknownZipCodeAlert()
+//            print("Unknown zipcode")
+//        }
+//    }
+//}
 
 //MARK: alerts
 extension SearchViewController {
@@ -176,7 +195,6 @@ extension SearchViewController {
         let alertController = UIAlertController(title: "No Job Centers",
                                                 message:"There are no job centers in this zipcode. Please search another zipcode",
                                                 preferredStyle: UIAlertControllerStyle.alert)
-        
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) //for other actions add in actions incompletion{}
         alertController.addAction(okAction)
         //present alert controller
