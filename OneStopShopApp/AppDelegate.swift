@@ -7,17 +7,42 @@
 //
 
 import UIKit
+import SnapKit
+
+
+class textVC: UIViewController{
+    
+    let detailView = DetailView()
+    override func viewDidLoad() {
+        view.addSubview(detailView)
+        view.backgroundColor = . green
+        view.addSubview(textView)
+    }
+    
+    lazy var textView: UITextView = {
+        let tv = UITextView()
+        tv.isEditable = false
+        tv.text = "630-673-1406"
+        tv.sizeToFit() //expands frame to fit the text for PAL
+        tv.frame.origin.y = 21 // bringing the y down 21 pixels.. for testing only!!
+        tv.dataDetectorTypes = .phoneNumber
+        //UIDataDetectorTypes.
+        return tv
+    }()
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         PersistantManager.manager.loadFavorites()
         window = UIWindow(frame: UIScreen.main.bounds)
+        
         let tbc = UITabBarController()
         let searchVC = SearchViewController()
         let favoritesVC = FavoritesViewController()
