@@ -68,6 +68,20 @@ extension FavoritesViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if !jobCenters.isEmpty {
+            return true
+        }
+        return false
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+       if !jobCenters.isEmpty {
+        if editingStyle == .delete {
+            PersistantManager.manager.removeFavorite(from: indexPath.row)
+            self.jobCenters.remove(at: indexPath.row)
+        }
+    }
     
 }
 
+}

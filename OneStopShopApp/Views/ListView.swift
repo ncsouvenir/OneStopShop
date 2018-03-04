@@ -18,7 +18,8 @@ class ListView: UIView {
     }()
     lazy var listImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "Queens")
+        imageView.image = #imageLiteral(resourceName: "placeholder copy")
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
  
