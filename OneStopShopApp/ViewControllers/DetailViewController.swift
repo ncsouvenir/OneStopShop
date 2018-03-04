@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UITableViewController {
 
@@ -34,6 +35,8 @@ class DetailViewController: UITableViewController {
         configureNavBar()
         setStarConstrain()
         self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
+        self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: "MapCell")
+        self.tableView.register(PhoneTableViewCell.self, forCellReuseIdentifier: "PhoneCell")
        self.contentComponents = ContentFactory.getContentComponents(jobCenter: jobCenter)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -50,29 +53,60 @@ class DetailViewController: UITableViewController {
         starView.widthAnchor.constraint(equalToConstant: 35).isActive = true
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentComponents.count
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
-        let content = contentComponents[indexPath.row]
         switch indexPath.row {
         case 0 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Name"
             cell.rightTextLabel.text = content.detail
-        case 1:
+            return cell
+        case 1 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Address"
             cell.rightTextLabel.text = content.detail
+            return cell
         case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneCell", for: indexPath) as! PhoneTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Phone Number"
-            cell.rightTextLabel.text = content.detail
+            cell.phoneTextView.text = content.detail
+            return cell
         case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "City"
             cell.rightTextLabel.text = content.detail
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapTableViewCell
+            cell.directionsButton.addTarget(self, action: #selector(showDirections), for: .touchUpInside)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = jobCenter.coordinate
+            cell.mapV.addAnnotation(annotation)
+            cell.mapV.showAnnotations(cell.mapV.annotations, animated: true)
+            cell.mapV.centerCoordinate = jobCenter.coordinate
+            cell.mapV.isScrollEnabled = false
+            cell.selectionStyle = .none
+            return cell
+            
         default:
-            print("error")
+            return UITableViewCell()
         }
-        return cell
+       
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 4:
+            return 250
+        default:
+            return 50
+        }
     }
     
     
@@ -83,6 +117,19 @@ class DetailViewController: UITableViewController {
         } else {
          self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "001-star-1"), style: .plain, target: self, action:  #selector(favoriteButtonPressed))
         }
+    }
+    
+    
+    @objc func showDirections() {
+        let userCoordinate = CLLocationCoordinate2DMake(UserDefaultsHelper.manager.getLatitude(), UserDefaultsHelper.manager.getLongitude())
+        let placeCoordinate = jobCenter.coordinate
+        let directionsURLString = "http://maps.apple.com/?saddr=\(userCoordinate.latitude),\(userCoordinate.longitude)&daddr=\(placeCoordinate.latitude),\(placeCoordinate.longitude)"
+        
+        let url = URL(string: directionsURLString)!
+        UIApplication.shared.open(url, options: [:]) { (done) in
+            print("launched apple maps")
+        }
+        
     }
     
     @objc func favoriteButtonPressed() {

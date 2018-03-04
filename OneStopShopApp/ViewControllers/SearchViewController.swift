@@ -42,14 +42,13 @@ class SearchViewController: UIViewController {
         didSet{
             // creating annotations
             for jobCenter in jobCenters {
+                guard let jobLatitude = jobCenter.latitude,
+                    let jobLongitude = jobCenter.longitude ,
+                    let doubleLat = Double(jobLatitude),
+                    let doubleLong = Double(jobLongitude) else {continue}
+                
                 let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2DMake(Double(jobCenter.latitude)!,
-                                                                   Double(jobCenter.longitude)!)
-                //                CLGeocoder().geocodeAddressString(jobCenter.streetAddress, completionHandler: { (placeMarks, error) in
-                //                    if let thisPlace = placeMarks?.last {
-                //                        annotation.coordinate = thisPlace.location!.coordinate
-                //                    }
-                //                })
+                annotation.coordinate = CLLocationCoordinate2DMake(doubleLat, doubleLong)
                 annotation.title = jobCenter.facilityName //this is the name that will show right unser the pin
                 annotations.append(annotation)
             }
@@ -65,12 +64,9 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(searchView)
         setupNavBar()
-        //set up delegates
-        searchView.mapView.delegate = self
-        //searchView.zipCodeSearchBar.delegate = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
-
         askUserForPermission()
+        searchView.mapView.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
         searchView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
     
@@ -122,25 +118,27 @@ extension SearchViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //setting up annotation views
         
-        //        if annotation is MKUserLocation{
-        //            return nil
-        //        }
+        //setting up the blue dot
+        if annotation is MKUserLocation{
+            return nil
+        }
         
         // setup annotation view for map
-        // we can fully customize the marker annotation view: customize!!
-        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") as? MKMarkerAnnotationView //MKMarkerAnnotationView
+        // we can fully customize the marker annotation view
+        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") as? MKAnnotationView //MKMarkerAnnotationView -> the view on top of the pin
         
         //if there is no annotation view, create a new one
         if jobCenterAnnotationView == nil {
-            jobCenterAnnotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "JobAnnotationView")
+            jobCenterAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "JobAnnotationView")
             jobCenterAnnotationView?.canShowCallout = true
             
             let index = annotations.index{$0 === annotation}
             
             if let annotationIndex = index {
-                let jobCenter = jobCenters[annotationIndex]
-                jobCenterAnnotationView?.glyphText = jobCenter.borough
-                //jobCenterAnnotationView?.image = #imageLiteral(resourceName: "brain")
+                //let jobCenter = jobCenters[annotationIndex]
+                //jobCenterAnnotationView?.glyphText = jobCenter.borough
+                jobCenterAnnotationView?.image = #imageLiteral(resourceName: "customImage").reDrawImage(using: CGSize(width: 50, height: 50)) //image is there.. It's just greyed out
+                jobCenterAnnotationView?.contentMode = .scaleAspectFit
             }
             jobCenterAnnotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
