@@ -22,9 +22,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
         //listView.ListTableView.rowHeight = 50
@@ -37,7 +35,8 @@ class ListViewController: UIViewController {
     }
     
     private func loadBoroughPicture(){
-        switch jobCenters[0].borough{
+        if let firstBorough = jobCenters.first {
+        switch firstBorough.borough {
         case "Manhattan":
             listView.listImageView.image = #imageLiteral(resourceName: "Pict_Manhattan")
         case "Bronx":
@@ -51,6 +50,9 @@ class ListViewController: UIViewController {
         default:
             break
         }
+        } else {
+            listView.listImageView.image = #imageLiteral(resourceName: "placeholder copy")
+        }
     }
 //        JobCenterAPIClient.manager.getResources(with: "11220", completionHandler: { (onlineJobCenters) in
 //            self.jobCenters = onlineJobCenters
@@ -63,8 +65,11 @@ class ListViewController: UIViewController {
     
     private func configureNavigation(){
 
-            navigationItem.title = jobCenters.first?.borough
+        navigationItem.title = jobCenters.first?.borough
         navigationItem.leftItemsSupplementBackButton = false
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     private func addConstraints(){
