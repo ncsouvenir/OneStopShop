@@ -37,6 +37,7 @@ struct JobCenterAPIClient {
     }
     
     func getResourcesByBorough(with borough: String, completionHandler: @escaping ([JobCenter]) -> Void, errorHandler: @escaping (Error) -> Void) {
+        
         guard let formattedBorough = borough.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) else {
             errorHandler(AppError.badURL(str: borough))
             return
