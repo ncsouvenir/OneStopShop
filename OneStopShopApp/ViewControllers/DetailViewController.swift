@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UITableViewController {
 
@@ -27,33 +28,64 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         configureNavBar()
         self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
+        self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: "MapCell")
        self.contentComponents = ContentFactory.getContentComponents(jobCenter: jobCenter)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentComponents.count
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
-        let content = contentComponents[indexPath.row]
         switch indexPath.row {
         case 0 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Name"
             cell.rightTextLabel.text = content.detail
-        case 1:
+            return cell
+        case 1 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Address"
             cell.rightTextLabel.text = content.detail
+            return cell
         case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Phone Number"
             cell.rightTextLabel.text = content.detail
+            return cell
         case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
+            let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "City"
             cell.rightTextLabel.text = content.detail
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapTableViewCell
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = jobCenter.coordinate
+            cell.mapV.addAnnotation(annotation)
+            cell.mapV.showAnnotations(cell.mapV.annotations, animated: true)
+            cell.mapV.centerCoordinate = jobCenter.coordinate
+            cell.mapV.isScrollEnabled = false
+            cell.selectionStyle = .none
+            return cell
+            
         default:
-            print("error")
+            return UITableViewCell()
         }
-        return cell
+       
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 4:
+            return 150
+        default:
+            return 50
+        }
     }
     
     
