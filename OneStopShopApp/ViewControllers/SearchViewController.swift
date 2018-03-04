@@ -67,7 +67,9 @@ class SearchViewController: UIViewController {
         setupNavBar()
         //set up delegates
         searchView.mapView.delegate = self
-        //searchView.zipCodeSearchBar.delegate = self
+        searchView.zipCodeSearchBar.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
+
         askUserForPermission()
         searchView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
@@ -88,6 +90,11 @@ class SearchViewController: UIViewController {
         default:
             print("This job center does not belong to  borough")
         }
+    }
+    @objc func presentListVC() {
+        let listVC = ListViewController()
+        listVC.jobCenters = self.jobCenters
+        self.navigationController?.pushViewController(listVC, animated: true)
     }
     
     func askUserForPermission(){
