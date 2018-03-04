@@ -23,7 +23,7 @@ class DetailTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "DetailCell")
@@ -36,6 +36,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        
         addSubview(leftTextLabel)
         
         leftTextLabel.snp.makeConstraints { (make) in
@@ -49,6 +50,8 @@ class DetailTableViewCell: UITableViewCell {
             })
             
         }
+      
+        
     }
 
     
