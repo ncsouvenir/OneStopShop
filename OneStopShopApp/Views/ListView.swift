@@ -11,11 +11,23 @@ import SnapKit
 class ListView: UIView {
 
     
-    lazy var ListTableView: UITableView = {
+    lazy var listTableView: UITableView = {
         let tv = UITableView()
         tv.register(ListTableViewCell.self, forCellReuseIdentifier: "ListCell")
         return tv
     }()
+    lazy var listImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "placeholder copy")
+        return imageView
+    }()
+    
+//    lazy var cityLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Place holder"
+//        label.numberOfLines = 0
+//        return label
+//    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,10 +43,22 @@ class ListView: UIView {
     }
     
     private func setupViews(){
-        addSubview(ListTableView)
+        addSubview(listTableView)
+        addSubview(listImageView)
+       
         
-        ListTableView.snp.makeConstraints { (tableView) in
-            tableView.edges.equalTo(snp.edges)
+        listImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.width.equalTo(snp.width)
+            //make.height.equalTo(snp.height).multipliedBy(0.4)
+            make.bottom.equalTo(listTableView.snp.top)
+            
+        }
+        listTableView.snp.makeConstraints { (tableView) in
+            tableView.top.equalTo(listImageView.snp.bottom)
+            tableView.width.equalTo(snp.width)
+            tableView.height.equalTo(snp.height).multipliedBy(0.6)
+            tableView.bottom.equalTo(snp.bottom)
         }
     }
 

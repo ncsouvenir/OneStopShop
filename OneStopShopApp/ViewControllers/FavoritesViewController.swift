@@ -5,9 +5,8 @@
 //  Created by C4Q on 3/3/18.
 //  Copyright © 2018 C4Q. All rights reserved.
 //
-
 import UIKit
-
+import SnapKit
 class FavoritesViewController: UIViewController {
     var favoritesView = FavoritesView()
     
@@ -32,7 +31,6 @@ class FavoritesViewController: UIViewController {
     
     private func loadData(){
         
-<<<<<<< HEAD
     }
     
     private func configureNavigation(){
@@ -40,23 +38,12 @@ class FavoritesViewController: UIViewController {
         navigationItem.title = "Favorite Centers "
     }
     
-=======
-    }
-    
-    private func configureNavigation(){
-        view.backgroundColor = .blue
-        navigationItem.title = "Favorite Centers "
-    }
-    
->>>>>>> bf38a552083692a7f50e5d938be64237a307dd35
     private func addConstraints(){
         view.addSubview(favoritesView)
         favoritesView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.snp.edges)
         }
     }
-<<<<<<< HEAD
-
     
 }
 extension FavoritesViewController: UITableViewDelegate {
@@ -79,31 +66,3 @@ extension FavoritesViewController: UITableViewDataSource {
     
 }
 
-
-=======
-    
-    
-}
-extension FavoritesViewController: UITableViewDelegate {
-    
-}
-extension FavoritesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jobCenters.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as? ListTableViewCell {
-            let jobCenter = jobCenters[indexPath.row]
-            cell.configureCell(jobCenter: jobCenter)
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    
-}
-
-
-
->>>>>>> bf38a552083692a7f50e5d938be64237a307dd35

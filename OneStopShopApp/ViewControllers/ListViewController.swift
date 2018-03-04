@@ -16,14 +16,14 @@ class ListViewController: UIViewController {
     
     var jobCenters = [JobCenter](){
         didSet {
-            listView.ListTableView.reloadData()
+            listView.listTableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listView.ListTableView.dataSource = self
-        listView.ListTableView.delegate = self
+        listView.listTableView.dataSource = self
+        listView.listTableView.delegate = self
         //listView.ListTableView.rowHeight = 50
         configureNavigation()
         addConstraints()
@@ -32,14 +32,17 @@ class ListViewController: UIViewController {
     }
     
     private func loadData(){
-        JobCenterAPIClient.manager.getResources(with: "11432", completionHandler: { (onlineJobCenters) in
-            self.jobCenters = onlineJobCenters
-        }, errorHandler: {print ($0)})
+//        JobCenterAPIClient.manager.getResources(with: "11220", completionHandler: { (onlineJobCenters) in
+//            self.jobCenters = onlineJobCenters
+//        }, errorHandler: {print ($0)})
+        JobCenterAPIClient.manager.getResourcesByBorough(with: "Brooklyn", completionHandler: { (onlineJobCenter) in
+            self.jobCenters = onlineJobCenter
+        }, errorHandler: {print($0)})
     }
     
     private func configureNavigation(){
         view.backgroundColor = .red
-            navigationItem.title = "List of Job Centers "
+            navigationItem.title = jobCenters.first?.borough
     }
     
     private func addConstraints(){

@@ -18,11 +18,7 @@ class ListTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var cityLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        return label
-    }()
+    
     
    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "ListCell")
@@ -43,17 +39,11 @@ class ListTableViewCell: UITableViewCell {
     
     private func setupViews() {
         addSubview(centerNameLabel)
-       
         centerNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left).offset(8)
             make.centerY.equalTo(snp.centerY)
         }
         
-        addSubview(cityLabel)
-        cityLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(snp.right).offset(-8)
-            make.centerY.equalTo(snp.centerY)
-        }
         
     }
 }
