@@ -55,7 +55,6 @@ class ListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
 
 //Extensions
@@ -79,4 +78,14 @@ extension ListViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedJobCenter = jobCenters[indexPath.row]
+        let detailVC = DetailViewController(jobCenter: selectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
+
+    
+    
+    
+
