@@ -15,7 +15,7 @@ struct ContentFactory {
         var components = [ContentComponents]()
         let nameComponent = ContentComponents(detail: jobCenter.facilityName)
         let addressComponent = ContentComponents(detail: jobCenter.streetAddress)
-        let phoneComponent = ContentComponents(detail: jobCenter.phoneNumber)
+        let phoneComponent = ContentComponents(detail: jobCenter.primaryPhoneNumber)
         let cityComponent = ContentComponents(detail: jobCenter.city)
         components.append(nameComponent)
         components.append(addressComponent)
