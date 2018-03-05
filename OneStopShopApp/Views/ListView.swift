@@ -54,7 +54,7 @@ class ListView: UIView {
 
         }
         listTableView.snp.makeConstraints { (tableView) in
-            tableView.top.equalTo(listImageView.snp.bottom)
+            tableView.top.equalTo(listImageView.snp.bottom)//.offset(10)
             tableView.width.equalTo(snp.width)
             tableView.height.equalTo(snp.height).multipliedBy(0.6)
             tableView.bottom.equalTo(snp.bottom)
