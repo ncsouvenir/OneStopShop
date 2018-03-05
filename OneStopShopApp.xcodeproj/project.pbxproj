@@ -13,6 +13,7 @@
 		814834B1204B014D00533508 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B0204B014D00533508 /* AppError.swift */; };
 		814834B3204B218700533508 /* ContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B2204B218700533508 /* ContentFactory.swift */; };
 		814834B5204B320800533508 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814834B4204B320800533508 /* DetailTableViewCell.swift */; };
+		81612A48204CD27500A9698D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81612A47204CD27500A9698D /* EmptyStateView.swift */; };
 		818F21BC204C46EF0074515C /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818F21BB204C46EF0074515C /* ImageResizer.swift */; };
 		81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */; };
 		81B62E1F204B5ABF003657AD /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B62E1E204B5ABF003657AD /* PersistanceManager.swift */; };
@@ -41,6 +42,7 @@
 		814834B0204B014D00533508 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		814834B2204B218700533508 /* ContentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFactory.swift; sourceTree = "<group>"; };
 		814834B4204B320800533508 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		81612A47204CD27500A9698D /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		818F21BB204C46EF0074515C /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		81A6D7B3204B014900FC5A22 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewCell.swift; path = "OneStopShopApp/Custom Cell/ListTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		81B62E1E204B5ABF003657AD /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				81D852A7204AF35600987370 /* SearchViewController.swift */,
+				81612A47204CD27500A9698D /* EmptyStateView.swift */,
 				81D852B3204AF43D00987370 /* ListViewController.swift */,
 				81D852B5204AF44B00987370 /* DetailViewController.swift */,
 				81D852B7204AF46300987370 /* FavoritesViewController.swift */,
@@ -331,6 +334,7 @@
 			files = (
 				81A6D7B4204B014900FC5A22 /* ListTableViewCell.swift in Sources */,
 				81D852B6204AF44B00987370 /* DetailViewController.swift in Sources */,
+				81612A48204CD27500A9698D /* EmptyStateView.swift in Sources */,
 				81D852A8204AF35600987370 /* SearchViewController.swift in Sources */,
 				81B62E1F204B5ABF003657AD /* PersistanceManager.swift in Sources */,
 				81D852B0204AF40F00987370 /* DetailView.swift in Sources */,

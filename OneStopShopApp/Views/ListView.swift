@@ -19,11 +19,11 @@ class ListView: UIView {
     }()
     lazy var listImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "placeholder copy")
+        //imageView.image = #imageLiteral(resourceName: "placeholder copy")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
- 
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,16 +39,16 @@ class ListView: UIView {
     }
     
     private func setupViews(){
-        addSubview(listImageView)
+      addSubview(listImageView)
         addSubview(listTableView)
        
-        
+
         listImageView.snp.makeConstraints { (make) in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.width.equalTo(snp.width)
             //make.height.equalTo(snp.height).multipliedBy(0.4)
             make.bottom.equalTo(listTableView.snp.top)
-            
+
         }
         listTableView.snp.makeConstraints { (tableView) in
             tableView.top.equalTo(listImageView.snp.bottom)
@@ -57,5 +57,4 @@ class ListView: UIView {
             tableView.bottom.equalTo(snp.bottom)
         }
     }
-
 }

@@ -13,10 +13,17 @@ import SnapKit
 class ListViewController: UIViewController {
     
     var listView = ListView()
+    var emptyStateView = EmptyStateView()
     
     var jobCenters = [JobCenter](){
         didSet {
             listView.listTableView.reloadData()
+            if jobCenters.isEmpty{
+                self.view.addSubview(emptyStateView)
+                print("state added")
+            } else {
+                self.view.addSubview(listView)
+            }
         }
     }
     
@@ -30,12 +37,10 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
         //listView.ListTableView.rowHeight = 50
-
-        view.addSubview(listView)
+       view.addSubview(listView)
         configureNavigation()
         addConstraints()
         loadBoroughPicture()
@@ -62,15 +67,7 @@ class ListViewController: UIViewController {
             listView.listImageView.image = #imageLiteral(resourceName: "placeholder copy")
         }
     }
-//        JobCenterAPIClient.manager.getResources(with: "11220", completionHandler: { (onlineJobCenters) in
-//            self.jobCenters = onlineJobCenters
-//        }, errorHandler: {print ($0)})
-//        JobCenterAPIClient.manager.getResourcesByBorough(with: "Brooklyn", completionHandler: { (onlineJobCenter) in
-//            self.jobCenters = onlineJobCenter
-//        }, errorHandler: {print($0)})
-        
-   // }
-    
+
     private func configureNavigation(){
         guard let navTitle = jobCenters.first?.borough else {return}
         navigationItem.title = "\(navTitle) Resource Centers"
@@ -85,13 +82,9 @@ class ListViewController: UIViewController {
         listView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.snp.edges)
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+   }
 }
+
 
 //Extensions
 extension ListViewController: UITableViewDelegate {
@@ -112,6 +105,7 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell {
             let jobCenter = jobCenters[indexPath.row]
+            cell.selectionStyle = .none
             switch indexPath.row % 2 {
             case 0:
                 cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
