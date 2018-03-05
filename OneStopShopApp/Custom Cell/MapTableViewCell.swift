@@ -22,7 +22,7 @@ class MapTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("Get Directions", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor.darkGray
+        button.backgroundColor = UIColor(displayP3Red: 247 / 255, green: 104 / 255, blue: 69 / 255, alpha: 1)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         return button
     }()
