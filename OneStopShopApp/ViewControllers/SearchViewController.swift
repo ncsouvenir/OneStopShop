@@ -10,41 +10,47 @@ import UIKit
 import CoreLocation
 import MapKit
 
+
 class SearchViewController: UIViewController {
-
-    let searchView = SearchView()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.view.addSubview(searchView)
-        // Do any additional setup after loading the view.
     
     let searchView = SearchView()
     var currentSelectedJobCenter: JobCenter!
     private var annotations = [MKAnnotation]()
-    
-    var pointAnnotation: CustomPointAnnotation!
     var pinAnnotationView: MKPinAnnotationView!
+    
+    var currentSelectedIndex: Int = 0 {
+        didSet{
+            let titleAtSelectedIndex = searchView.boroughArray[currentSelectedIndex]
+            let loadJobCentersFromInternet: ([JobCenter]) -> Void = {(onlineJobCenters:[JobCenter]) in
+                DispatchQueue.main.async {
+                    self.jobCenters.removeAll()
+                    self.searchView.mapView.removeAnnotations(self.annotations)
+                    self.annotations.removeAll()
+                    self.jobCenters = onlineJobCenters
+                    if self.jobCenters.isEmpty{
+                        self.noJobCentersAlert()
+                    }
+                }
+            }
+            JobCenterAPIClient.manager.getResourcesByBorough(with: titleAtSelectedIndex,
+                                                             completionHandler: loadJobCentersFromInternet,
+                                                             errorHandler: {print($0)})
+        }
+    }
     
     var jobCenters = [JobCenter](){
         didSet{
             // creating annotations
             for jobCenter in jobCenters {
-                let annotation = MKPointAnnotation()
-//                annotation.coordinate = CLLocationCoordinate2DMake(Double(jobCenter.latitude)!,
-//                                                                   Double(jobCenter.longitude)!)
-                CLGeocoder().geocodeAddressString(jobCenter.streetAddress, completionHandler: { (placeMarks, error) in
-                    if let thisPlace = placeMarks?.last {
-                        annotation.coordinate = thisPlace.location!.coordinate
-                    }
-                })
+                guard let jobLatitude = jobCenter.latitude,
+                    let jobLongitude = jobCenter.longitude ,
+                    let doubleLat = Double(jobLatitude),
+                    let doubleLong = Double(jobLongitude) else {continue}
                 
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2DMake(doubleLat, doubleLong)
                 annotation.title = jobCenter.facilityName //this is the name that will show right unser the pin
                 annotations.append(annotation)
-                
-                
-                
-                
             }
             // adding annotations to mapview - update ui
             DispatchQueue.main.async {
@@ -58,11 +64,38 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(searchView)
         setupNavBar()
-        //set up delegates
-        searchView.mapView.delegate = self
-        searchView.zipCodeSearchBar.delegate = self
         askUserForPermission()
-
+        searchView.mapView.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
+        searchView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
+        //Zoom to user location
+//        let noLocation = CLLocationCoordinate2D(latitude: -74.1197639, longitude: 40.6976637)
+//        let viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 200, 200)
+//        searchView.mapView.setRegion(viewRegion, animated: false)
+    }
+    
+    //"Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"
+    @objc func segmentedControlValueChanged(segControl: UISegmentedControl){
+        switch segControl.selectedSegmentIndex{
+        case 0:
+            currentSelectedIndex = 0
+        case 1:
+            currentSelectedIndex = 1
+        case 2:
+            currentSelectedIndex = 2
+        case 3:
+            currentSelectedIndex = 3
+        case 4:
+            currentSelectedIndex = 4
+        default:
+            print("This job center does not belong to  borough")
+        }
+    }
+    @objc func presentListVC() {
+        let listVC = ListViewController()
+        listVC.jobCenters = self.jobCenters
+        self.navigationController?.pushViewController(listVC, animated: true)
     }
     
     func askUserForPermission(){
@@ -72,8 +105,7 @@ class SearchViewController: UIViewController {
     func setupNavBar(){
         navigationItem.title = "One-Stop-Shop"
         //Add right bar button
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "listIcon"), style: .plain, target: self, action: #selector(showListView))
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(showListView))
     }
     
     @objc func showListView(){
@@ -89,27 +121,28 @@ extension SearchViewController: MKMapViewDelegate{
     
     //similar to cell for row at in table view
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        //setting up annotation views
-        
-        //        if annotation is MKUserLocation{
-        //            return nil
-        //        }
+        //setting up annotation view
+        //setting up the blue dot
+        if annotation is MKUserLocation{
+            return nil
+        }
         
         // setup annotation view for map
-        // we can fully customize the marker annotation view: customize!!
-        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") as? MKMarkerAnnotationView //MKMarkerAnnotationView
+        // we can fully customize the marker annotation view
+        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") //MKMarkerAnnotationView -> the view on top of the pin
         
         //if there is no annotation view, create a new one
         if jobCenterAnnotationView == nil {
-            jobCenterAnnotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "JobAnnotationView")
+            jobCenterAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "JobAnnotationView")
             jobCenterAnnotationView?.canShowCallout = true
             
             let index = annotations.index{$0 === annotation}
             
             if let annotationIndex = index {
-                let jobCenter = jobCenters[annotationIndex]
-                jobCenterAnnotationView?.glyphText = jobCenter.borough
-                //jobCenterAnnotationView?.image = #imageLiteral(resourceName: "brain")
+                //let jobCenter = jobCenters[annotationIndex]
+                //jobCenterAnnotationView?.glyphText = jobCenter.borough
+                jobCenterAnnotationView?.image = #imageLiteral(resourceName: "orangeImage").reDrawImage(using: CGSize(width: 50, height: 50))//image is there.. It's just greyed out
+                jobCenterAnnotationView?.contentMode = .scaleAspectFit
             }
             jobCenterAnnotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
@@ -117,7 +150,6 @@ extension SearchViewController: MKMapViewDelegate{
             jobCenterAnnotationView?.annotation = annotation
         }
         //TODO: For later: setting jobCenterAnnotationView's image
-        
         return jobCenterAnnotationView
     }
     
@@ -125,62 +157,20 @@ extension SearchViewController: MKMapViewDelegate{
     //similar to didSelect in tableviews
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //find the place selected and set that place to be the current place
-        
         let index = annotations.index{$0 === view.annotation}
         guard let annotationIndex = index else { print("index is nil"); return }
         let jobCenter = jobCenters[annotationIndex]
-        
         currentSelectedJobCenter = jobCenter
-        
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //present the detail view controller
+        let detailVC = DetailViewController(jobCenter: currentSelectedJobCenter)
+        navigationController?.pushViewController(detailVC, animated: true)
         print("This is going to the List View Controller")
     }
 }
 
-//MARK: Search bar delegate
-extension SearchViewController: UISearchBarDelegate{
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        //validating the search by zipCode
-        guard let text = searchView.zipCodeSearchBar.text else {print("job center search is nil");return}
-        guard !text.isEmpty else {print("job center search is empty");return}
-        guard let encodedJobCenterSearch = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {print("");return}
-        //TODO: give error alert if no job centers exist
-        
-        if text.count != 5 {
-            searchBar.text = ""
-            //invalidZipCodeAlert()
-            print("Invalid zipCode")
-        }
-        
-        if text < String(00501) && text > String(99950) {
-            //unknownZipCodeAlert()
-            print("Unknown zipcode")
-        }
-        
-        //completion
-        let loadJobCentersFromInternet: ([JobCenter]) -> Void = {(onlineJobCenters:[JobCenter]) in
-            DispatchQueue.main.async {
-                
-                self.jobCenters.removeAll()
-                self.searchView.mapView.removeAnnotations(self.annotations)
-                self.annotations.removeAll()
-                self.jobCenters = onlineJobCenters
-                if self.jobCenters.isEmpty{
-                    self.noJobCentersAlert()
-                }
-                
-            }
-        }
-        //call API
-        JobCenterAPIClient.manager.getResources(with: encodedJobCenterSearch,
-                                                completionHandler: loadJobCentersFromInternet,
-                                                errorHandler: {print($0)})
-    }
-}
 
 //MARK: alerts
 extension SearchViewController {
@@ -188,13 +178,10 @@ extension SearchViewController {
         let alertController = UIAlertController(title: "No Job Centers",
                                                 message:"There are no job centers in this zipcode. Please search another zipcode",
                                                 preferredStyle: UIAlertControllerStyle.alert)
-        
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) //for other actions add in actions incompletion{}
         alertController.addAction(okAction)
         //present alert controller
         self.present(alertController, animated: true, completion: nil)
     }
-
 }
-
 

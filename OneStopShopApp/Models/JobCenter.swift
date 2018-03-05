@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct JobCenter: Codable {
     let borough: String
@@ -14,11 +15,10 @@ struct JobCenter: Codable {
     let comments: String?
     let facilityName: String?
     let city: String
-    let latitude: String
-    let longitude: String
-    let nta: String
+    let latitude: String?
+    let longitude: String?
     let zipCode: String
-    let phoneNumber: String?
+    let phoneNumber: String
     enum CodingKeys: String, CodingKey {
         case borough
         case streetAddress = "street_address"
@@ -27,9 +27,22 @@ struct JobCenter: Codable {
         case city
         case latitude
         case longitude
-        case nta
         case zipCode = "zip_code"
         case phoneNumber = "phone_number_s"
     }
+    
+    var coordinate: CLLocationCoordinate2D {
+        guard let lat = latitude, let long = longitude else {return CLLocationCoordinate2DMake(0.0, 0.0)}
+        guard let latDouble = Double(lat), let longDouble = Double(long) else {return CLLocationCoordinate2DMake(0.0, 0.0)}
+        return CLLocationCoordinate2DMake(latDouble, longDouble)
+        
+    }
+    var primaryPhoneNumber: String {
+        let phoneArr = phoneNumber.components(separatedBy: "/")
+        guard let phoneNumber = phoneArr.first else {return "N/A"}
+        return phoneNumber
+        
+    }
+    
     
 }

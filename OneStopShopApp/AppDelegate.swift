@@ -7,22 +7,54 @@
 //
 
 import UIKit
+import SnapKit
+
+
+class textVC: UIViewController{
+    
+    let detailView = DetailView()
+    override func viewDidLoad() {
+        view.addSubview(detailView)
+        view.backgroundColor = . green
+        view.addSubview(textView)
+    }
+    
+    lazy var textView: UITextView = {
+        let tv = UITextView()
+        tv.isEditable = false
+        tv.text = "630-673-1406"
+        tv.sizeToFit() //expands frame to fit the text for PAL
+        tv.frame.origin.y = 21 // bringing the y down 21 pixels.. for testing only!!
+        tv.dataDetectorTypes = .phoneNumber
+        //UIDataDetectorTypes.
+        return tv
+    }()
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         PersistantManager.manager.loadFavorites()
-       // let searchVC = SearchViewController()
-        let tabVC = TabBarViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = tabVC
+        
+        let tbc = UITabBarController()
+        let searchVC = SearchViewController()
+        let favoritesVC = FavoritesViewController()
+        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        let navController = UINavigationController(rootViewController: searchVC)
+        let nvc = UINavigationController(rootViewController: favoritesVC)
+        tbc.setViewControllers([navController, nvc], animated: true)
+        window?.rootViewController = tbc
         window?.makeKeyAndVisible()
         return true
+    
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
