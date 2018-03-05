@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+
 struct JobCenter: Codable {
     let borough: String
     let streetAddress: String

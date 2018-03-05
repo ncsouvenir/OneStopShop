@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import MapKit
 import SnapKit
 
@@ -109,3 +108,4 @@ class SearchView: UIView {
         }
     }
 }
+

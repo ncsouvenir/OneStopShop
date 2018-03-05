@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
 import CoreLocation
 import MapKit
+
 
 class SearchViewController: UIViewController {
     
@@ -121,8 +121,7 @@ extension SearchViewController: MKMapViewDelegate{
     
     //similar to cell for row at in table view
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        //setting up annotation views
-        
+        //setting up annotation view
         //setting up the blue dot
         if annotation is MKUserLocation{
             return nil
@@ -172,6 +171,7 @@ extension SearchViewController: MKMapViewDelegate{
     }
 }
 
+
 //MARK: alerts
 extension SearchViewController {
     func noJobCentersAlert(){
@@ -183,5 +183,5 @@ extension SearchViewController {
         //present alert controller
         self.present(alertController, animated: true, completion: nil)
     }
-    
 }
+
