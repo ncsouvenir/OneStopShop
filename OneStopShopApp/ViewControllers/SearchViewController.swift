@@ -68,6 +68,11 @@ class SearchViewController: UIViewController {
         searchView.mapView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list-filled-30 copy") , style: .plain, target: self, action: #selector(presentListVC))
         searchView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
+        //Zoom to user location
+//        let noLocation = CLLocationCoordinate2D(latitude: -74.1197639, longitude: 40.6976637)
+//        let viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 200, 200)
+//        searchView.mapView.setRegion(viewRegion, animated: false)
     }
     
     //"Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"
@@ -153,13 +158,10 @@ extension SearchViewController: MKMapViewDelegate{
     //similar to didSelect in tableviews
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //find the place selected and set that place to be the current place
-        
         let index = annotations.index{$0 === view.annotation}
         guard let annotationIndex = index else { print("index is nil"); return }
         let jobCenter = jobCenters[annotationIndex]
-        
         currentSelectedJobCenter = jobCenter
-        
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

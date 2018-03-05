@@ -18,12 +18,6 @@ class ListViewController: UIViewController {
     var jobCenters = [JobCenter](){
         didSet {
             listView.listTableView.reloadData()
-            if jobCenters.isEmpty{
-                self.view.addSubview(emptyStateView)
-                print("state added")
-            } else {
-                self.view.addSubview(listView)
-            }
         }
     }
     
@@ -32,6 +26,7 @@ class ListViewController: UIViewController {
         super.viewWillAppear(animated)
         if let selectionIndexPath = listView.listTableView.indexPathForSelectedRow {
             self.listView.listTableView.deselectRow(at: selectionIndexPath, animated: animated)
+            addConstraints()
         }
     }
     
@@ -40,34 +35,42 @@ class ListViewController: UIViewController {
         listView.listTableView.dataSource = self
         listView.listTableView.delegate = self
         //listView.ListTableView.rowHeight = 50
-       view.addSubview(listView)
+        //view.addSubview(listView)
         configureNavigation()
         addConstraints()
         loadBoroughPicture()
-
+        if jobCenters.isEmpty{
+            self.view.addSubview(emptyStateView)
+            emptyStateView.snp.makeConstraints({ (make) in
+                make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
+            })
+            print("state added")
+        } else {
+            self.view.addSubview(listView)
+        }
     }
     
     private func loadBoroughPicture(){
         if let firstBorough = jobCenters.first {
-        switch firstBorough.borough {
-        case "Manhattan":
-            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Manhattan")
-        case "Bronx":
-            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Bronx")
-        case "Brooklyn":
-            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Brooklyn")
-        case "Queens":
-            listView.listImageView.image = #imageLiteral(resourceName: "Pict_Queens")
-        case "Staten Island":
-            listView.listImageView.image = #imageLiteral(resourceName: "Pict_StatenIsland")
-        default:
-            break
-        }
+            switch firstBorough.borough {
+            case "Manhattan":
+                listView.listImageView.image = #imageLiteral(resourceName: "Pict_Manhattan")
+            case "Bronx":
+                listView.listImageView.image = #imageLiteral(resourceName: "Pict_Bronx")
+            case "Brooklyn":
+                listView.listImageView.image = #imageLiteral(resourceName: "Pict_Brooklyn")
+            case "Queens":
+                listView.listImageView.image = #imageLiteral(resourceName: "Pict_Queens")
+            case "Staten Island":
+                listView.listImageView.image = #imageLiteral(resourceName: "Pict_StatenIsland")
+            default:
+                break
+            }
         } else {
             listView.listImageView.image = #imageLiteral(resourceName: "placeholder copy")
         }
     }
-
+    
     private func configureNavigation(){
         guard let navTitle = jobCenters.first?.borough else {return}
         navigationItem.title = "\(navTitle) Resource Centers"
@@ -77,12 +80,14 @@ class ListViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
-    private func addConstraints(){
+    
+    func addConstraints(){
         view.addSubview(listView)
-        listView.snp.makeConstraints { (make) in
+        listView.snp.remakeConstraints { (make) in
             make.edges.equalTo(view.snp.edges)
         }
-   }
+    }
+    
 }
 
 
@@ -119,7 +124,7 @@ extension ListViewController: UITableViewDataSource {
     }
 }
 
-    
-    
-    
+
+
+
 
