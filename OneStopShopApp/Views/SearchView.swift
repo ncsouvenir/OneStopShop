@@ -21,25 +21,38 @@ class SearchView: UIView {
     
     let boroughArray: [String] = ["Brooklyn", "Queens", "Bronx", "Manhattan", "Staten Island"]
     
-//    lazy var zipCodeSearchBar: UISearchBar = {
-//        let searchBar = UISearchBar()
-//        searchBar.placeholder = "Queens NY"
-//        searchBar.barTintColor = .white
-//        return searchBar
-//    }()
-//
-
+    //    lazy var zipCodeSearchBar: UISearchBar = {
+    //        let searchBar = UISearchBar()
+    //        searchBar.placeholder = "Queens NY"
+    //        searchBar.barTintColor = .white
+    //        return searchBar
+    //    }()
+    //
+    
     lazy var segmentedControl: UISegmentedControl = {
         let segControl = UISegmentedControl(items: boroughArray)
         segControl.backgroundColor = UIColor.white
         return segControl
     }()
-
+    
     
     lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true
-        //map.visibleMapRect = MKMapRect(origin: <#T##MKMapPoint#>, size: <#T##MKMapSize#>)
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString("New York, New York", completionHandler: { (placemark, error) in
+            if let placemark = placemark {
+                let location = placemark[0].location!
+                let lat = location.coordinate.latitude
+                let long = location.coordinate.longitude
+                map.setCenter(location.coordinate, animated: true)
+                
+                //numbers are in meters
+                //this sets the center that is zoomed in around your location
+                let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 15000, 15000)
+                map.setRegion(region, animated: true)
+            }
+        })
         return map
     }()
     
@@ -65,26 +78,16 @@ class SearchView: UIView {
         //setupZipCodeSearchBar()
         setupSegmentedControl()
         setupMapView()
-
+        
     }
     
     
     func setupVenueSearchBar() {
         //search bar constraints
     }
-    
-//    func setupZipCodeSearchBar() {
-//        addSubview(zipCodeSearchBar)
-//        self.zipCodeSearchBar.snp.makeConstraints { (make) in
-//            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-//            make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
-//            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
-//            make.height.equalTo(40)
-//        }
-//    }
-    
-    func setupSegmentedControl() {
 
+    func setupSegmentedControl() {
+        
         addSubview(segmentedControl)
         self.segmentedControl.snp.makeConstraints { (make) in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
