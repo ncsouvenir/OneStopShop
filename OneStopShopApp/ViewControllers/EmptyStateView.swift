@@ -14,8 +14,9 @@ class EmptyStateView: UIView {
     lazy var emptyStateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.text = "Please select a borough to see your list of resource centers"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         return label
     }()
     
@@ -28,18 +29,17 @@ class EmptyStateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func commonInit() {
-        backgroundColor = .red
+        backgroundColor = .white
         setupViews()
-        
     }
     
     private func setupViews(){
             addSubview(emptyStateLabel)
             emptyStateLabel.snp.makeConstraints { (make) in
                 make.centerX.equalTo(snp.centerX)
-                make.top.equalTo(safeAreaLayoutGuide.snp.bottom)
-                make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
-                make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
+                make.centerY.equalTo(snp.centerY)
+                make.leading.equalTo(snp.leading)
+                make.trailing.equalTo(snp.trailing)
             }
         
         }
