@@ -15,12 +15,14 @@ class DetailTableViewCell: UITableViewCell {
     lazy var leftTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
     lazy var rightTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
 

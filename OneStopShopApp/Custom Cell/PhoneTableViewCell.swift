@@ -13,7 +13,7 @@ class PhoneTableViewCell: UITableViewCell {
     lazy var phoneTextView: UITextView = {
         let tv = UITextView()
         tv.isEditable = false
-        tv.backgroundColor = .white
+        tv.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
         tv.textColor = .black
         tv.font = UIFont.systemFont(ofSize: 20)
         tv.dataDetectorTypes = .phoneNumber
@@ -23,6 +23,7 @@ class PhoneTableViewCell: UITableViewCell {
     lazy var leftTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
@@ -48,12 +49,10 @@ class PhoneTableViewCell: UITableViewCell {
                 make.trailing.equalTo(snp.trailing).offset(-8)
                 make.centerY.equalTo(snp.centerY)
                 make.width.equalTo(160)
-                make.height.equalTo(60)
+                make.height.equalTo(50)
             })
         }
-        
-        
-        
+ 
     }
     
 }

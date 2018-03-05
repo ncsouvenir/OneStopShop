@@ -34,6 +34,7 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         configureNavBar()
         setStarConstrain()
+          view.backgroundColor = .green
         self.tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailCell")
         self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: "MapCell")
         self.tableView.register(PhoneTableViewCell.self, forCellReuseIdentifier: "PhoneCell")
@@ -63,6 +64,8 @@ class DetailViewController: UITableViewController {
             let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Name"
             cell.rightTextLabel.text = content.detail
+                cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
+            
             return cell
         case 1 :
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
@@ -75,6 +78,7 @@ class DetailViewController: UITableViewController {
             let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Phone Number"
             cell.phoneTextView.text = content.detail
+           cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
@@ -92,6 +96,7 @@ class DetailViewController: UITableViewController {
             cell.mapV.centerCoordinate = jobCenter.coordinate
             cell.mapV.isScrollEnabled = false
             cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
             return cell
             
         default:
@@ -159,9 +164,6 @@ class DetailViewController: UITableViewController {
         animation.repeatCount = 1
       starView.layer.add(animation, forKey: nil)
     }
-    
-
-    
 }
 
 extension DetailViewController: CAAnimationDelegate {

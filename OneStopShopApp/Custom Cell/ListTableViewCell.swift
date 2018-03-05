@@ -15,6 +15,7 @@ class ListTableViewCell: UITableViewCell {
     lazy var centerNameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     

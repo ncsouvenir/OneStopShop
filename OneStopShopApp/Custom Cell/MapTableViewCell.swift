@@ -22,7 +22,8 @@ class MapTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("Get Directions", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor.darkGray
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         return button
     }()
     
@@ -45,11 +46,9 @@ class MapTableViewCell: UITableViewCell {
         addSubview(mapV)
         mapV.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(directionsButton.snp.top).offset(-20)
+            make.bottom.equalTo(directionsButton.snp.top).offset(-10)
             make.left.equalTo(safeAreaLayoutGuide).offset(5)
             make.right.equalTo(safeAreaLayoutGuide).offset(-5)
-            
-            //make.bottom.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self.snp.centerX)
         }
     }
@@ -59,6 +58,8 @@ class MapTableViewCell: UITableViewCell {
         directionsButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
             make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            make.width.equalTo(safeAreaLayoutGuide.snp.width)
+            //make.height.equalTo(safeAreaLayoutGuide.snp.height)
             //make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(8)
         }
     }
