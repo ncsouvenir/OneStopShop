@@ -26,7 +26,7 @@ class FavoritesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func commonInit() {
-        backgroundColor = .blue
+         backgroundColor = .green
         setupViews()
     }
     

@@ -14,6 +14,7 @@ class ListView: UIView {
     lazy var listTableView: UITableView = {
         let tv = UITableView()
         tv.register(ListTableViewCell.self, forCellReuseIdentifier: "ListCell")
+        tv.tableFooterView = UIView(frame: .zero)
         return tv
     }()
     lazy var listImageView: UIImageView = {
@@ -33,7 +34,7 @@ class ListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     private func commonInit() {
-        backgroundColor = .white
+          backgroundColor = .green
         setupViews()
     }
     
