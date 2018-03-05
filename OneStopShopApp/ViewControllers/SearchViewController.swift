@@ -125,7 +125,7 @@ extension SearchViewController: MKMapViewDelegate{
         
         // setup annotation view for map
         // we can fully customize the marker annotation view
-        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") as? MKAnnotationView //MKMarkerAnnotationView -> the view on top of the pin
+        var jobCenterAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "JobAnnotationView") //MKMarkerAnnotationView -> the view on top of the pin
         
         //if there is no annotation view, create a new one
         if jobCenterAnnotationView == nil {
@@ -137,7 +137,7 @@ extension SearchViewController: MKMapViewDelegate{
             if let annotationIndex = index {
                 //let jobCenter = jobCenters[annotationIndex]
                 //jobCenterAnnotationView?.glyphText = jobCenter.borough
-                jobCenterAnnotationView?.image = #imageLiteral(resourceName: "customImage").reDrawImage(using: CGSize(width: 50, height: 50)) //image is there.. It's just greyed out
+                jobCenterAnnotationView?.image = #imageLiteral(resourceName: "orangeImage").reDrawImage(using: CGSize(width: 50, height: 50))//image is there.. It's just greyed out
                 jobCenterAnnotationView?.contentMode = .scaleAspectFit
             }
             jobCenterAnnotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
@@ -146,7 +146,6 @@ extension SearchViewController: MKMapViewDelegate{
             jobCenterAnnotationView?.annotation = annotation
         }
         //TODO: For later: setting jobCenterAnnotationView's image
-        
         return jobCenterAnnotationView
     }
     
@@ -170,29 +169,6 @@ extension SearchViewController: MKMapViewDelegate{
         print("This is going to the List View Controller")
     }
 }
-
-//MARK: Search bar delegate
-//extension SearchViewController: UISearchBarDelegate{
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
-//        //validating the search by zipCode
-//        guard let text = searchView.zipCodeSearchBar.text else {print("job center search is nil");return}
-//        guard !text.isEmpty else {print("job center search is empty");return}
-//        guard let encodedJobCenterSearch = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {print("");return}
-//        //TODO: give error alert if no job centers exist
-//
-//        if text.count != 5 {
-//            searchBar.text = ""
-//            //invalidZipCodeAlert()
-//            print("Invalid zipCode")
-//        }
-//
-//        if text < String(00501) && text > String(99950) {
-//            //unknownZipCodeAlert()
-//            print("Unknown zipcode")
-//        }
-//    }
-//}
 
 //MARK: alerts
 extension SearchViewController {
