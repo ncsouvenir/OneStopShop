@@ -65,6 +65,7 @@ class DetailViewController: UITableViewController {
             cell.leftTextLabel.text = "Name"
             cell.rightTextLabel.text = content.detail
                 cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
+            cell.selectionStyle = .none
             
             return cell
         case 1 :
@@ -72,6 +73,7 @@ class DetailViewController: UITableViewController {
             let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "Address"
             cell.rightTextLabel.text = content.detail
+            cell.selectionStyle = .none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneCell", for: indexPath) as! PhoneTableViewCell
@@ -79,12 +81,14 @@ class DetailViewController: UITableViewController {
             cell.leftTextLabel.text = "Phone Number"
             cell.phoneTextView.text = content.detail
            cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
+            cell.selectionStyle = .none
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailTableViewCell
             let content = contentComponents[indexPath.row]
             cell.leftTextLabel.text = "City"
             cell.rightTextLabel.text = content.detail
+            cell.selectionStyle = .none
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapTableViewCell
@@ -97,6 +101,7 @@ class DetailViewController: UITableViewController {
             cell.mapV.isScrollEnabled = false
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
+            cell.selectionStyle = .none
             return cell
             
         default:
@@ -108,7 +113,7 @@ class DetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 4:
-            return 250
+            return 425
         default:
             return 50
         }
