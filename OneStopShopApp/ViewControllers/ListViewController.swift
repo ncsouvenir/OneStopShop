@@ -20,6 +20,14 @@ class ListViewController: UIViewController {
         }
     }
     
+    //Deselects the selected row
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectionIndexPath = listView.listTableView.indexPathForSelectedRow {
+            self.listView.listTableView.deselectRow(at: selectionIndexPath, animated: animated)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,8 +72,8 @@ class ListViewController: UIViewController {
    // }
     
     private func configureNavigation(){
-
-        navigationItem.title = jobCenters.first?.borough
+        guard let navTitle = jobCenters.first?.borough else {return}
+        navigationItem.title = "\(navTitle) Resource Centers"
         navigationItem.leftItemsSupplementBackButton = false
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
@@ -104,7 +112,12 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell {
             let jobCenter = jobCenters[indexPath.row]
-            
+            switch indexPath.row % 2 {
+            case 0:
+                cell.backgroundColor = UIColor(displayP3Red: 232 / 255, green: 234 / 255, blue: 237 / 255, alpha: 1)
+            default:
+                cell.backgroundColor = .white
+            }
             cell.configureCell(jobCenter: jobCenter)
             return cell
         }
