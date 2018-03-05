@@ -39,6 +39,7 @@ class SearchView: UIView {
     lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true
+        //map.visibleMapRect = MKMapRect(origin: <#T##MKMapPoint#>, size: <#T##MKMapSize#>)
         return map
     }()
     
@@ -55,7 +56,7 @@ class SearchView: UIView {
     }
     
     func commonInit() {
-        backgroundColor = .blue
+        backgroundColor = .green
         setupViews()
     }
     
