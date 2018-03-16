@@ -1,4 +1,4 @@
-![Introduction](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Problem.png "The Problem")
+![Introduction](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/Screen%20Shot%202018-03-16%20at%203.03.27%20PM.png)
 
 
 ## One Stop Shop is a C4Q Access Code Hackathon Project, serving New Yorkers by connecting them to resource centers to receive social service benefits all under one roof
