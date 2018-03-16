@@ -29,12 +29,8 @@ It’s no secret that New York City doesn’t make it easy for people to get acc
 
 Main Tab View | Clicking Through | More Options
 :---: | :---: | :---:
-![Registration Screen](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen1-1.png?raw=true "Registration Screen") Register and Log in | ![Login Screen](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen1-2.png?raw=true "Login Screen") Log in | 
-![Agenda Screen With Checklist](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen2-1.png?raw=true "Agenda Screen With Checklist") Lessons with Daily Checklist | ![Checklist Done](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen2-2.png?raw=true "Checklist Done") Hooray! Your tasks are done |  
-![Shared Links](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen3-1.png?raw=true "Shared Links") Shared links repository | ![Share Extension in Browser](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen3-2.png?raw=true "Share Extension in Browser") Share Extension in Browsers | ![Sharing Prompt](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen3-3.png?raw=true "Sharing Prompt") Sharing Prompt for Context
-![Class Announcements](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen4.png?raw=true "Class Announcements") Class Announcements |  | 
-![Assignments and Grades](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen5-1.png?raw=true "Assignments and Grades") HW Assignments and Grades | ![Link to Assignments](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen5-2.png?raw=true "Link to Assignments") Link of Assignment | 
-![Profile Screen](https://github.com/C4Q/AC3.2-weLearn/blob/master/readmeImages/Screen6.png?raw=true "Profile Screen") Your Profile | | 
+![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/launchAndLocationAuth.gif) Register and Log in | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/searchByBorough.gif) Log in | 
+![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/getDirections.gif) Lessons with Daily Checklist | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/saveAndDelete.gif) Hooray! Your tasks are done | |
 
 
 
