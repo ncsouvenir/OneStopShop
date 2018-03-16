@@ -57,6 +57,6 @@ Main Tab View | Clicking Through | More Options
 
 
 
-#Thanks for reading this far and we welcome any feedback!
+## Thanks for reading this far and we welcome any feedback!
 
 
