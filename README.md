@@ -27,10 +27,10 @@ It’s no secret that New York City doesn’t make it easy for people to get acc
 
 ## App Flow
 
-Main Tab View | Clicking Through | More Options
+Search View| Detail View | .
 :---: | :---: | :---:
-![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/launchAndLocationAuth.gif) Register and Log in | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/searchByBorough.gif) Log in | 
-![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/getDirections.gif) Lessons with Daily Checklist | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/saveAndDelete.gif) Hooray! Your tasks are done | |
+![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/launchAndLocationAuth.gif) App asks user for location authorization | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/searchByBorough.gif) User searches for resource cneter by borough | 
+![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/getDirections.gif) Get directions from user location to resource center | ![gif](https://github.com/ncsouvenir/OneStopShop/blob/master/Gifs/saveAndDelete.gif) User can save a resource center and delete | |
 
 
 
